@@ -1,0 +1,287 @@
+<!doctype html>
+<!--
+  Meadowbrook Mortgage Demo — Blog post 5
+  Portfolio demo by 1MR LLC. Not a real financial services firm.
+
+  Head, skip link, disclaimer banner, header and footer copied verbatim
+  from index.html per tools/verify.sh. Only <main> differs. Asset paths
+  stay absolute-from-root even though this file lives in /blog.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Escrow, Underwriting, Appraisal: A Buyer's Glossary | Meadowbrook</title>
+    <meta
+      name="description"
+      content="Three words that show up in nearly every closing conversation, defined the way a loan officer would explain them out loud rather than the way a textbook would."
+    />
+    <link rel="canonical" href="https://mortgage-referral-demo.pages.dev/blog/post-5" />
+    <meta name="robots" content="index,follow" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#1a4d8f" />
+
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Meadowbrook Mortgage Demo" />
+    <meta
+      property="og:title"
+      content="Escrow, Underwriting, Appraisal: A Buyer's Glossary | Meadowbrook"
+    />
+    <meta
+      property="og:description"
+      content="Three words that show up in nearly every closing conversation, defined in plain language."
+    />
+    <meta property="og:url" content="https://mortgage-referral-demo.pages.dev/blog/post-5" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a4d8f'/%3E%3Cpath d='M16 7 6 15h3v10h5v-6h4v6h5V15h3z' fill='%23fff'/%3E%3C/svg%3E"
+      type="image/svg+xml"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MortgageLoanCompany",
+        "@id": "https://mortgage-referral-demo.pages.dev/#organization",
+        "name": "Meadowbrook Mortgage Demo",
+        "description": "A demo of the personalized-referral flow that a small mortgage branch would ship to real estate agent partners.",
+        "url": "https://mortgage-referral-demo.pages.dev/",
+        "telephone": "+1-630-555-0100",
+        "email": "hello@meadowbrook-mortgage-demo.example",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1200 Meadowbrook Court, Suite 210",
+          "addressLocality": "Naperville",
+          "addressRegion": "IL",
+          "postalCode": "60540",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 41.7508,
+          "longitude": -88.1535
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "10:00",
+            "closes": "14:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "6",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "DuPage County, Illinois"
+        },
+        "disambiguatingDescription": "Fictional business used as a portfolio demonstration by 1MR LLC. Not a real financial services firm."
+      }
+    </script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <script src="/js/params.js" defer></script>
+    <script src="/js/analytics.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="disclaimer-banner">
+      <div class="wrapper">
+        Portfolio demo by 1MR LLC. Not a real financial services firm.
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="wrapper site-header__inner repel">
+        <a class="site-logo" href="/">
+          <svg
+            class="site-logo__mark"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect width="32" height="32" rx="6" fill="#1a4d8f" />
+            <path d="M16 7 6 15h3v10h5v-6h4v6h5V15h3z" fill="#fff" />
+          </svg>
+          <span class="site-logo__text">
+            Meadowbrook
+            <small>Mortgage Demo</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Main">
+          <ul class="cluster">
+            <li><a href="/about">About</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/agents">For Agents</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog" aria-current="page">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a class="button" href="/apply">Apply</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="wrapper flow region" data-width="narrow">
+        <article class="flow">
+          <h1>Escrow, Underwriting, Appraisal: A Plain-Language Glossary for Buyers</h1>
+          <p class="card__meta">
+            <time datetime="2026-08-18">August 18, 2026</time> · 2 min read
+          </p>
+
+          <div class="prose flow">
+            <p>
+              Three words. They get thrown around in nearly every conversation about
+              buying a home, and they rarely get defined along the way. Here's what each
+              one actually means, without the jargon.
+            </p>
+
+            <h2>Escrow</h2>
+            <p>
+              A neutral third party holds funds and documents until every condition of a
+              sale has been met, then releases everything at once. It exists so neither a
+              buyer nor a seller has to simply trust the other; a separate account
+              handles the money until both sides have done their part. The same word also
+              describes an ongoing account a lender may use afterward to collect for
+              property taxes and insurance a bit at a time.
+            </p>
+
+            <h2>Underwriting</h2>
+            <p>
+              This is the review process where a lender examines the documentation a
+              buyer submitted, along with the appraisal, and decides whether the loan can
+              move forward. It's less a single event than a period of verification, and
+              questions during this stretch are normal rather than alarming.
+            </p>
+
+            <h2>Appraisal</h2>
+            <p>
+              An independent, licensed appraiser visits the property and estimates its
+              market value, giving the lender confidence that the loan amount is in line
+              with what the home is actually worth. It protects the lender, but it also
+              protects a buyer from significantly overpaying.
+            </p>
+          </div>
+
+          <div class="notice" data-tone="neutral">
+            <p class="notice__title">A note on this article</p>
+            <p>
+              This post is generic educational content written for the Meadowbrook
+              Mortgage Demo portfolio project. It is not financial advice, and your loan
+              officer can walk you through how these steps apply to your situation.
+            </p>
+          </div>
+
+          <nav class="cluster" aria-label="Post navigation">
+            <a href="/blog/post-4">
+              Previous: From Accepted Offer to Closing Day
+            </a>
+            <a href="/blog">More posts on the blog</a>
+          </nav>
+          <p><a href="/blog">Back to all posts</a></p>
+
+          <p class="text-center flow-space-l">
+            Have a term you keep hearing and still can't pin down?
+            <br />
+            <a class="button" data-size="large" href="/apply">Start an application</a>
+          </p>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer region">
+      <div class="wrapper flow">
+        <div class="grid" data-layout="thirds">
+          <div class="flow">
+            <h2>Meadowbrook Mortgage Demo</h2>
+            <p>
+              1200 Meadowbrook Court, Suite 210<br />
+              Naperville, IL 60540
+            </p>
+            <p>
+              <a href="tel:+16305550100">(630) 555-0100</a><br />
+              <a href="sms:+16305550100">Text us</a><br />
+              <a href="mailto:hello@meadowbrook-mortgage-demo.example">
+                hello@meadowbrook-mortgage-demo.example
+              </a>
+            </p>
+          </div>
+
+          <div class="flow">
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/about">About</a></li>
+              <li><a href="/team">Our team</a></li>
+              <li><a href="/agents">For agents</a></li>
+              <li><a href="/reviews">Reviews</a></li>
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/calendar">Book a call</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="flow">
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy">Privacy policy</a></li>
+              <li><a href="/terms">Terms of use</a></li>
+              <li><a href="/disclosures">Disclosures</a></li>
+            </ul>
+            <h2 class="flow-space-l">Elsewhere</h2>
+            <ul>
+              <li>
+                <a href="https://1mr.llc" rel="noopener">Built by 1MR LLC</a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/0xjjjjjj/mortgage-referral-demo"
+                  rel="noopener"
+                  >Source on GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="disclaimer">
+          <strong>Portfolio demo by 1MR LLC. Not a real financial services firm.</strong>
+          Meadowbrook Mortgage Demo is a fictional business created to demonstrate static
+          site development, URL personalization and CRM form integration. No content on
+          this site is an offer to lend, a commitment to lend, or financial advice. The
+          loan officers, testimonials, address and phone number are invented.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

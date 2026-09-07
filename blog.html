@@ -1,0 +1,324 @@
+<!doctype html>
+<!--
+  Meadowbrook Mortgage Demo — Blog index
+  Portfolio demo by 1MR LLC. Not a real financial services firm.
+
+  Head, skip link, disclaimer banner, header and footer copied verbatim
+  from index.html per tools/verify.sh. Only <main> differs.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Blog — Plain-Language Mortgage Reading | Meadowbrook</title>
+    <meta
+      name="description"
+      content="Short, plain-language articles on pre-qualification, paperwork, referrals, closing and mortgage terms. Educational samples from the Meadowbrook Mortgage Demo portfolio project."
+    />
+    <link rel="canonical" href="https://mortgage-referral-demo.pages.dev/blog" />
+    <meta name="robots" content="index,follow" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#1a4d8f" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Meadowbrook Mortgage Demo" />
+    <meta
+      property="og:title"
+      content="Blog — Plain-Language Mortgage Reading | Meadowbrook"
+    />
+    <meta
+      property="og:description"
+      content="Short, plain-language articles on pre-qualification, paperwork, referrals, closing and mortgage terms."
+    />
+    <meta property="og:url" content="https://mortgage-referral-demo.pages.dev/blog" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a4d8f'/%3E%3Cpath d='M16 7 6 15h3v10h5v-6h4v6h5V15h3z' fill='%23fff'/%3E%3C/svg%3E"
+      type="image/svg+xml"
+    />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MortgageLoanCompany",
+        "@id": "https://mortgage-referral-demo.pages.dev/#organization",
+        "name": "Meadowbrook Mortgage Demo",
+        "description": "A demo of the personalized-referral flow that a small mortgage branch would ship to real estate agent partners.",
+        "url": "https://mortgage-referral-demo.pages.dev/",
+        "telephone": "+1-630-555-0100",
+        "email": "hello@meadowbrook-mortgage-demo.example",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1200 Meadowbrook Court, Suite 210",
+          "addressLocality": "Naperville",
+          "addressRegion": "IL",
+          "postalCode": "60540",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 41.7508,
+          "longitude": -88.1535
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "10:00",
+            "closes": "14:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "6",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "DuPage County, Illinois"
+        },
+        "disambiguatingDescription": "Fictional business used as a portfolio demonstration by 1MR LLC. Not a real financial services firm."
+      }
+    </script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <script src="/js/params.js" defer></script>
+    <script src="/js/analytics.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="disclaimer-banner">
+      <div class="wrapper">
+        Portfolio demo by 1MR LLC. Not a real financial services firm.
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="wrapper site-header__inner repel">
+        <a class="site-logo" href="/">
+          <svg
+            class="site-logo__mark"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect width="32" height="32" rx="6" fill="#1a4d8f" />
+            <path d="M16 7 6 15h3v10h5v-6h4v6h5V15h3z" fill="#fff" />
+          </svg>
+          <span class="site-logo__text">
+            Meadowbrook
+            <small>Mortgage Demo</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Main">
+          <ul class="cluster">
+            <li><a href="/about">About</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/agents">For Agents</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog" aria-current="page">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a class="button" href="/apply">Apply</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero region">
+        <div class="wrapper flow">
+          <p class="hero__eyebrow">Blog</p>
+          <h1>Plain-language reading on the mortgage process</h1>
+          <p class="hero__lede">
+            Five short articles explaining the vocabulary and mechanics of getting a
+            mortgage, written the way a loan officer would explain it in person. No
+            rates, no offers, just the concepts.
+          </p>
+        </div>
+      </section>
+
+      <section class="region">
+        <div class="wrapper flow">
+          <div class="notice" data-tone="neutral">
+            <p class="notice__title">About these articles</p>
+            <p>
+              The posts below are generic educational samples written for this portfolio
+              demo. They explain common mortgage concepts in plain language and are not
+              financial advice, and they are not specific to any real lender or loan
+              program.
+            </p>
+          </div>
+
+          <ul class="post-list flow-space-l">
+            <li class="post-list__item">
+              <h2 class="post-list__title">
+                <a href="/blog/post-5">
+                  Escrow, Underwriting, Appraisal: A Plain-Language Glossary for Buyers
+                </a>
+              </h2>
+              <p class="card__meta">
+                <time datetime="2026-08-18">August 18, 2026</time> · 2 min read
+              </p>
+              <p>
+                Three words that show up in every closing conversation, defined the way a
+                loan officer would explain them over coffee, not the way a textbook would.
+              </p>
+            </li>
+
+            <li class="post-list__item">
+              <h2 class="post-list__title">
+                <a href="/blog/post-4">
+                  From Accepted Offer to Closing Day: What Actually Happens in Between
+                </a>
+              </h2>
+              <p class="card__meta">
+                <time datetime="2026-07-22">July 22, 2026</time> · 2 min read
+              </p>
+              <p>
+                The weeks between a signed contract and the closing table are the least
+                understood part of buying a home. Here is a walk through what typically
+                fills them.
+              </p>
+            </li>
+
+            <li class="post-list__item">
+              <h2 class="post-list__title">
+                <a href="/blog/post-3">
+                  Why a Referral From Your Agent Changes How the Process Starts
+                </a>
+              </h2>
+              <p class="card__meta">
+                <time datetime="2026-06-30">June 30, 2026</time> · 2 min read
+              </p>
+              <p>
+                A warm handoff from a real estate agent skips the coldest part of shopping
+                for a loan officer. Here is what typically changes, and what does not.
+              </p>
+            </li>
+
+            <li class="post-list__item">
+              <h2 class="post-list__title">
+                <a href="/blog/post-2">
+                  The Paperwork Checklist: What Lenders Typically Ask Buyers to Gather
+                </a>
+              </h2>
+              <p class="card__meta">
+                <time datetime="2026-05-14">May 14, 2026</time> · 2 min read
+              </p>
+              <p>
+                Pay stubs, bank statements, tax returns. A rundown of the documents that
+                usually come up early, and why each one matters to an underwriter.
+              </p>
+            </li>
+
+            <li class="post-list__item">
+              <h2 class="post-list__title">
+                <a href="/blog/post-1">
+                  Pre-Qualification vs. Pre-Approval: What's the Real Difference?
+                </a>
+              </h2>
+              <p class="card__meta">
+                <time datetime="2026-04-02">April 2, 2026</time> · 2 min read
+              </p>
+              <p>
+                Two terms buyers hear early and often confuse. Understanding the
+                difference can change how sellers and agents treat an offer.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer region">
+      <div class="wrapper flow">
+        <div class="grid" data-layout="thirds">
+          <div class="flow">
+            <h2>Meadowbrook Mortgage Demo</h2>
+            <p>
+              1200 Meadowbrook Court, Suite 210<br />
+              Naperville, IL 60540
+            </p>
+            <p>
+              <a href="tel:+16305550100">(630) 555-0100</a><br />
+              <a href="sms:+16305550100">Text us</a><br />
+              <a href="mailto:hello@meadowbrook-mortgage-demo.example">
+                hello@meadowbrook-mortgage-demo.example
+              </a>
+            </p>
+          </div>
+
+          <div class="flow">
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/about">About</a></li>
+              <li><a href="/team">Our team</a></li>
+              <li><a href="/agents">For agents</a></li>
+              <li><a href="/reviews">Reviews</a></li>
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/calendar">Book a call</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="flow">
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy">Privacy policy</a></li>
+              <li><a href="/terms">Terms of use</a></li>
+              <li><a href="/disclosures">Disclosures</a></li>
+            </ul>
+            <h2 class="flow-space-l">Elsewhere</h2>
+            <ul>
+              <li>
+                <a href="https://1mr.llc" rel="noopener">Built by 1MR LLC</a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/0xjjjjjj/mortgage-referral-demo"
+                  rel="noopener"
+                  >Source on GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="disclaimer">
+          <strong>Portfolio demo by 1MR LLC. Not a real financial services firm.</strong>
+          Meadowbrook Mortgage Demo is a fictional business created to demonstrate static
+          site development, URL personalization and CRM form integration. No content on
+          this site is an offer to lend, a commitment to lend, or financial advice. The
+          loan officers, testimonials, address and phone number are invented.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

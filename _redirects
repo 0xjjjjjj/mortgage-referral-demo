@@ -1,0 +1,130 @@
+# =============================================================================
+# _redirects — Cloudflare Pages redirect rules
+# Portfolio demo by 1MR LLC. Not a real financial services firm.
+# =============================================================================
+#
+# FORMAT
+# ------
+#   /source-path   /destination-path   [status]
+#
+# One rule per line. Whitespace-separated. Lines beginning with # are
+# comments. Status defaults to 302 if omitted — always state it explicitly,
+# because the default is almost never what you want for a site migration.
+#
+# 301 vs 302 — this is the decision that matters
+# ----------------------------------------------
+#   301 Moved Permanently
+#     Tells search engines the old URL is dead and its accumulated ranking
+#     signal should transfer to the destination. Use this for a site
+#     migration: it is how you keep the SEO equity a legacy site spent years
+#     earning. Browsers cache 301s aggressively and, on some versions,
+#     effectively forever — so a wrong 301 is expensive to walk back. Get the
+#     destination right before you ship it.
+#
+#   302 Found (temporary)
+#     Tells search engines the old URL is still canonical and will return.
+#     Ranking signal stays with the source. Use for A/B tests, seasonal
+#     landing pages, maintenance windows, geo-routing — anything you intend
+#     to undo.
+#
+#   Rule of thumb: if you will never serve the old URL again, 301. If you
+#   might, 302. When genuinely unsure, ship 302 first — a 302 can be promoted
+#   to a 301 later, but a cached 301 cannot easily be revoked.
+#
+# CLOUDFLARE PAGES SPECIFICS
+# --------------------------
+#   * Static files win. If a real file exists at the source path, it is
+#     served and the redirect never fires. Every source path below is
+#     verified disjoint from the 22 real pages by tools/verify.sh.
+#   * Rules are evaluated top to bottom; the first match wins. Order the
+#     specific above the general.
+#   * Query strings on the SOURCE are ignored for matching but are forwarded
+#     to the destination automatically. Query strings on the DESTINATION are
+#     preserved as written, which is what the three vanity rules rely on.
+#   * Limits: 2,100 static rules per project, of which up to 100 may be
+#     dynamic (containing :placeholders or * splats). We use 18.
+#   * This file must sit in the root of the build output directory. With no
+#     build step, that is the repo root — which is where it is.
+#
+# VERIFYING
+# ---------
+#   curl -sI https://<your-domain>/about-us | head -n 2
+#   Expect: HTTP/2 301  and  location: /about
+#
+#   Follow the whole chain and assert a single hop:
+#   curl -sIL -o /dev/null -w '%{num_redirects} %{url_effective}\n' \
+#     https://<your-domain>/about-us
+#
+#   tools/verify.sh --live <base-url> checks all 18 in one pass.
+#
+# =============================================================================
+
+
+# -----------------------------------------------------------------------------
+# VANITY LINKS — one per loan officer
+# -----------------------------------------------------------------------------
+# These are the URLs an agent actually types into a text message, so they are
+# short, lowercase and unambiguous when read aloud. Each carries the officer
+# slug through as a query parameter that /start reads and resolves against
+# data/loan-officers.json.
+#
+# 301 rather than 302: these short links are permanent public identifiers and
+# we want them consolidated onto /start for search purposes.
+
+/sarah      /start?lo=sarah      301
+/marcus     /start?lo=marcus     301
+/jordan     /start?lo=jordan     301
+
+
+# -----------------------------------------------------------------------------
+# LEGACY URL MIGRATION — 15 rules
+# -----------------------------------------------------------------------------
+# The shape of a real migration: paths from a previous WordPress or hand-built
+# site, mapped to their nearest equivalent on the new one. All 301, because
+# the old site is being retired and its ranking signal should follow.
+#
+# Note the mapping principle — every legacy URL points at the closest
+# equivalent page, never at the homepage as a catch-all. Bulk-redirecting a
+# retired site to "/" is the single most common migration mistake: Google
+# treats a redirect to an irrelevant page as a soft 404 and discards the
+# ranking signal entirely, which defeats the reason for redirecting at all.
+
+# Home and index variants
+/home                     /                 301
+/index.php                /                 301
+
+# Company pages
+/about-us                 /about            301
+/our-team                 /team             301
+/our-team/sarah-chen      /team/sarah       301
+/our-team/marcus-reyes    /team/marcus      301
+/our-team/jordan-ellis    /team/jordan      301
+
+# Conversion paths — the old site scattered these across three URLs
+/services                 /apply            301
+/apply-now                /apply            301
+/loan-application         /apply            301
+
+# Contact and partner pages
+/contact-us               /contact          301
+/realtors                 /agents           301
+/schedule-a-call          /calendar         301
+
+# Content
+/testimonials             /reviews          301
+/news                     /blog             301
+
+
+# -----------------------------------------------------------------------------
+# PATTERNS NOT USED HERE, DOCUMENTED FOR REFERENCE
+# -----------------------------------------------------------------------------
+# Splat — captures the remainder of a path into :splat
+#   /blog/2023/*   /blog/:splat   301
+#
+# Named placeholder — captures one path segment
+#   /lo/:name      /start?lo=:name   301
+#
+# Both count against the 100-rule dynamic limit rather than the 2,100 static
+# limit, so prefer explicit static rules while the list is small and legible.
+# A dynamic rule is the right call once you are migrating hundreds of URLs
+# that share a predictable shape.

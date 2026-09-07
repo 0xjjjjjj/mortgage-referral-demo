@@ -1,0 +1,434 @@
+<!doctype html>
+<!--
+  ===========================================================================
+  Meadowbrook Mortgage Demo — FAQ (/faq)
+  Portfolio demo by 1MR LLC. Not a real financial services firm.
+
+  <head>, skip link, disclaimer banner, <header> and <footer> are copied
+  verbatim from index.html, the canonical page template. Only <title>, the
+  meta description, the canonical and og URLs, the nav aria-current marker
+  and the contents of <main> differ. tools/verify.sh enforces that.
+  ===========================================================================
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Frequently Asked Questions — Meadowbrook Mortgage Demo</title>
+    <meta
+      name="description"
+      content="General answers about referral links, what pre-qualification means, documents commonly requested, and how this portfolio demo handles the information you enter."
+    />
+    <link rel="canonical" href="https://mortgage-referral-demo.pages.dev/faq" />
+    <meta name="robots" content="index,follow" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#1a4d8f" />
+
+    <!-- Open Graph. og:image is omitted deliberately: this repo carries no
+         binary assets, and a broken image reference is worse than none. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Meadowbrook Mortgage Demo" />
+    <meta
+      property="og:title"
+      content="Frequently Asked Questions — Meadowbrook Mortgage Demo"
+    />
+    <meta
+      property="og:description"
+      content="General answers about referral links, pre-qualification, documents commonly requested, and how this demo handles information."
+    />
+    <meta property="og:url" content="https://mortgage-referral-demo.pages.dev/faq" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a4d8f'/%3E%3Cpath d='M16 7 6 15h3v10h5v-6h4v6h5V15h3z' fill='%23fff'/%3E%3C/svg%3E"
+      type="image/svg+xml"
+    />
+
+    <!-- ===================================================================
+         LocalBusiness schema (JSON-LD). Present in the <head> of every page.
+
+         Type MortgageLoanCompany is a subtype of FinancialService, which is
+         itself a LocalBusiness — so this satisfies the LocalBusiness
+         requirement while being maximally specific, which is what Google's
+         structured-data guidance asks for.
+
+         Everything below is fictional. aggregateRating intentionally
+         matches the six testimonials rendered on /reviews; a schema rating
+         count that disagrees with the visible reviews is both a validator
+         warning and, on a real site, a policy problem.
+         =================================================================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MortgageLoanCompany",
+        "@id": "https://mortgage-referral-demo.pages.dev/#organization",
+        "name": "Meadowbrook Mortgage Demo",
+        "description": "A demo of the personalized-referral flow that a small mortgage branch would ship to real estate agent partners.",
+        "url": "https://mortgage-referral-demo.pages.dev/",
+        "telephone": "+1-630-555-0100",
+        "email": "hello@meadowbrook-mortgage-demo.example",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1200 Meadowbrook Court, Suite 210",
+          "addressLocality": "Naperville",
+          "addressRegion": "IL",
+          "postalCode": "60540",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 41.7508,
+          "longitude": -88.1535
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "10:00",
+            "closes": "14:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "6",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "DuPage County, Illinois"
+        },
+        "disambiguatingDescription": "Fictional business used as a portfolio demonstration by 1MR LLC. Not a real financial services firm."
+      }
+    </script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- ===================================================================
+         GA4. Measurement ID is a placeholder — see README "Configuration".
+         Loaded async so it never blocks render; the gtag stub queues any
+         calls made before the library arrives.
+         =================================================================== -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <!-- Deferred: execute in order, after parse, without blocking render. -->
+    <script src="/js/params.js" defer></script>
+    <script src="/js/analytics.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Disclaimer appears twice on every page: here at the very top where
+         it cannot be missed, and again in the footer. Mortgage services are
+         regulated; this is server-rendered HTML, never injected by JS. -->
+    <div class="disclaimer-banner">
+      <div class="wrapper">
+        Portfolio demo by 1MR LLC. Not a real financial services firm.
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="wrapper site-header__inner repel">
+        <a class="site-logo" href="/">
+          <svg
+            class="site-logo__mark"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect width="32" height="32" rx="6" fill="#1a4d8f" />
+            <path d="M16 7 6 15h3v10h5v-6h4v6h5V15h3z" fill="#fff" />
+          </svg>
+          <span class="site-logo__text">
+            Meadowbrook
+            <small>Mortgage Demo</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Main">
+          <ul class="cluster">
+            <li><a href="/about">About</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/agents">For Agents</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/faq" aria-current="page">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a class="button" href="/apply">Apply</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+
+      <section class="region">
+        <div class="wrapper flow" data-width="narrow">
+          <p class="hero__eyebrow">FAQ</p>
+          <h1>Frequently asked questions</h1>
+          <p class="hero__lede">
+            General, educational answers about how the referral link works and what the
+            early stages of a mortgage conversation usually involve. Nothing here is
+            specific to any person, property or loan.
+          </p>
+
+          <div class="notice" data-tone="neutral">
+            <p class="notice__title">Read this first</p>
+            <p>
+              Meadowbrook Mortgage Demo is a fictional business built as a portfolio
+              demonstration by 1MR LLC. Nothing below is an offer to lend, a commitment to
+              lend, or financial advice. For guidance about your own situation, speak to a
+              licensed mortgage professional.
+            </p>
+          </div>
+
+          <!-- Native <details>/<summary>. No JavaScript: the browser handles
+               open and close, keyboard operation and the accessibility tree
+               without a line of script, and the answers stay in the HTML for
+               anyone who arrives with JS disabled. -->
+          <div class="flow-space-l">
+            <details class="faq-item">
+              <summary>Is this a real mortgage company?</summary>
+              <div class="faq-item__body">
+                <p>
+                  No. Meadowbrook Mortgage Demo is fictional. It exists to demonstrate a
+                  static site build, URL-based personalization and CRM form integration.
+                  The loan officers, testimonials, address and phone number are invented,
+                  and no form on this site transmits anything anywhere.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>My agent sent me a link. Why did it have my agent's name in it?</summary>
+              <div class="faq-item__body">
+                <p>
+                  Referral links carry two pieces of context in the address itself: who
+                  referred you, and which loan officer is expected to look after the
+                  enquiry. The landing page reads both straight out of the link, which is
+                  why it can greet you by your agent's name without you filling anything
+                  in.
+                </p>
+                <p>
+                  You can see it working on the
+                  <a href="/start?agent=Dana%20Whitfield&amp;lo=sarah">demo landing page</a>
+                  and change the values in the address bar yourself.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>What happens if the link is mistyped or forwarded?</summary>
+              <div class="faq-item__body">
+                <p>
+                  Nothing breaks. If the referral details are missing, misspelled or point
+                  at somebody who is not on the team, the page falls back to a generic
+                  welcome and carries on. You will not see an error message, and you can
+                  still get in touch the normal way.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>What does pre-qualification actually mean?</summary>
+              <div class="faq-item__body">
+                <p>
+                  In general industry usage, pre-qualification is an early, informal
+                  conversation. You describe your circumstances, a loan officer explains
+                  the options that tend to fit situations like that, and you both get a
+                  sense of whether it is worth going further.
+                </p>
+                <p>
+                  It is not an approval and it is not a commitment to lend. Anything
+                  discussed at that stage remains subject to a complete application,
+                  documentation, underwriting and credit approval.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>How is pre-qualification different from pre-approval?</summary>
+              <div class="faq-item__body">
+                <p>
+                  The terms are used loosely across the industry, and different lenders
+                  define them differently, so it is always worth asking what a particular
+                  lender means by them. Broadly, pre-qualification is the lighter,
+                  conversational step, while pre-approval involves submitting documentation
+                  and a review by the lender. Neither one is a guarantee of financing.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>What documents are usually involved?</summary>
+              <div class="faq-item__body">
+                <p>
+                  This varies by lender, by loan type and by your circumstances, and the
+                  list you are given may look nothing like the one below. As a general
+                  matter, lenders commonly ask about:
+                </p>
+                <ul>
+                  <li>Proof of identity</li>
+                  <li>Recent income documentation, such as pay statements or tax returns</li>
+                  <li>Recent bank or asset statements</li>
+                  <li>Details of current housing costs</li>
+                  <li>Information about existing debts and obligations</li>
+                </ul>
+                <p>
+                  Self-employed applicants are typically asked for a longer history than
+                  salaried applicants. Ask for the specific list before you start gathering
+                  anything.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>How long does the process take?</summary>
+              <div class="faq-item__body">
+                <p>
+                  There is no meaningful general answer, and anyone who gives you a firm
+                  number before seeing your file is guessing. Timing depends on the loan
+                  type, how quickly documentation arrives, the property itself, and factors
+                  outside the lender's control. A good loan officer will tell you what the
+                  next step is and what is likely to hold it up.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>Does it cost anything to ask a question?</summary>
+              <div class="faq-item__body">
+                <p>
+                  Initial conversations with a loan officer are ordinarily free and carry
+                  no obligation. Costs associated with an actual mortgage application, such
+                  as third-party fees, are disclosed to you in writing before you commit to
+                  anything. Ask for that in writing, always.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>What happens to the information I submit?</summary>
+              <div class="faq-item__body">
+                <p>
+                  On a real site, an application form of this kind would pass your details
+                  to the branch's CRM, along with the referring agent and the loan officer
+                  who owns the enquiry, and would be handled under that firm's privacy
+                  policy.
+                </p>
+                <p>
+                  On <em>this</em> site nothing is transmitted at all. The form on
+                  <a href="/apply">the apply page</a> is a non-functional mock with no
+                  destination. Please do not enter real personal or financial information
+                  anywhere on this demo. See the
+                  <a href="/privacy">sample privacy policy</a> for the fuller picture.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item">
+              <summary>Can I speak to someone instead of filling in a form?</summary>
+              <div class="faq-item__body">
+                <p>
+                  On a real branch site, yes — by phone, by text, by email or by booking a
+                  call. Because this business is fictional, none of those routes reaches a
+                  person here, but the
+                  <a href="/calendar">booking page</a> shows how the scheduling step would
+                  fit into the flow.
+                </p>
+              </div>
+            </details>
+          </div>
+
+          <p class="text-muted flow-space-xl">
+            Nothing on this page is an offer to lend, a commitment to lend, or financial
+            advice.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer region">
+      <div class="wrapper flow">
+        <div class="grid" data-layout="thirds">
+          <div class="flow">
+            <h2>Meadowbrook Mortgage Demo</h2>
+            <p>
+              1200 Meadowbrook Court, Suite 210<br />
+              Naperville, IL 60540
+            </p>
+            <p>
+              <a href="tel:+16305550100">(630) 555-0100</a><br />
+              <a href="sms:+16305550100">Text us</a><br />
+              <a href="mailto:hello@meadowbrook-mortgage-demo.example">
+                hello@meadowbrook-mortgage-demo.example
+              </a>
+            </p>
+          </div>
+
+          <div class="flow">
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/about">About</a></li>
+              <li><a href="/team">Our team</a></li>
+              <li><a href="/agents">For agents</a></li>
+              <li><a href="/reviews">Reviews</a></li>
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/calendar">Book a call</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="flow">
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy">Privacy policy</a></li>
+              <li><a href="/terms">Terms of use</a></li>
+              <li><a href="/disclosures">Disclosures</a></li>
+            </ul>
+            <h2 class="flow-space-l">Elsewhere</h2>
+            <ul>
+              <li>
+                <a href="https://1mr.llc" rel="noopener">Built by 1MR LLC</a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/0xjjjjjj/mortgage-referral-demo"
+                  rel="noopener"
+                  >Source on GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="disclaimer">
+          <strong>Portfolio demo by 1MR LLC. Not a real financial services firm.</strong>
+          Meadowbrook Mortgage Demo is a fictional business created to demonstrate static
+          site development, URL personalization and CRM form integration. No content on
+          this site is an offer to lend, a commitment to lend, or financial advice. The
+          loan officers, testimonials, address and phone number are invented.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

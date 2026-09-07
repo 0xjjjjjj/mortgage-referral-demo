@@ -1,0 +1,11 @@
+# robots.txt — Meadowbrook Mortgage Demo
+# Portfolio demo by 1MR LLC. Not a real financial services firm.
+
+User-agent: *
+Allow: /
+
+# No Disallow rules: every page here is intended to be crawlable. A real
+# mortgage site would typically disallow internal search result pages and
+# any authenticated application portal, neither of which exists in this demo.
+
+Sitemap: https://mortgage-referral-demo.pages.dev/sitemap.xml

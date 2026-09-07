@@ -1,0 +1,381 @@
+<!doctype html>
+<!--
+  ===========================================================================
+  Meadowbrook Mortgage Demo — For Agents
+  Portfolio demo by 1MR LLC. Not a real financial services firm.
+
+  Copied from the canonical template (index.html). Only the <title>,
+  <meta name="description">, <link rel="canonical">, the three og: values,
+  the aria-current nav marker and <main> differ from the template.
+  ===========================================================================
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>For Real Estate Agents — Meadowbrook Mortgage Demo</title>
+    <meta
+      name="description"
+      content="How the referral flow works for real estate agent partners: vanity links, an optional agent name parameter, and attribution that follows the buyer to application."
+    />
+    <link rel="canonical" href="https://mortgage-referral-demo.pages.dev/agents" />
+    <meta name="robots" content="index,follow" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#1a4d8f" />
+
+    <!-- Open Graph. og:image is omitted deliberately: this repo carries no
+         binary assets, and a broken image reference is worse than none. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Meadowbrook Mortgage Demo" />
+    <meta
+      property="og:title"
+      content="For Real Estate Agents — Meadowbrook Mortgage Demo"
+    />
+    <meta
+      property="og:description"
+      content="How the referral flow works for real estate agent partners: vanity links, an optional agent name parameter, and attribution that follows to application."
+    />
+    <meta property="og:url" content="https://mortgage-referral-demo.pages.dev/agents" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a4d8f'/%3E%3Cpath d='M16 7 6 15h3v10h5v-6h4v6h5V15h3z' fill='%23fff'/%3E%3C/svg%3E"
+      type="image/svg+xml"
+    />
+
+    <!-- ===================================================================
+         LocalBusiness schema (JSON-LD). Present in the <head> of every page.
+
+         Type MortgageLoanCompany is a subtype of FinancialService, which is
+         itself a LocalBusiness — so this satisfies the LocalBusiness
+         requirement while being maximally specific, which is what Google's
+         structured-data guidance asks for.
+
+         Everything below is fictional. aggregateRating intentionally
+         matches the six testimonials rendered on /reviews; a schema rating
+         count that disagrees with the visible reviews is both a validator
+         warning and, on a real site, a policy problem.
+         =================================================================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MortgageLoanCompany",
+        "@id": "https://mortgage-referral-demo.pages.dev/#organization",
+        "name": "Meadowbrook Mortgage Demo",
+        "description": "A demo of the personalized-referral flow that a small mortgage branch would ship to real estate agent partners.",
+        "url": "https://mortgage-referral-demo.pages.dev/",
+        "telephone": "+1-630-555-0100",
+        "email": "hello@meadowbrook-mortgage-demo.example",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1200 Meadowbrook Court, Suite 210",
+          "addressLocality": "Naperville",
+          "addressRegion": "IL",
+          "postalCode": "60540",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 41.7508,
+          "longitude": -88.1535
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "10:00",
+            "closes": "14:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "6",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "DuPage County, Illinois"
+        },
+        "disambiguatingDescription": "Fictional business used as a portfolio demonstration by 1MR LLC. Not a real financial services firm."
+      }
+    </script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- ===================================================================
+         GA4. Measurement ID is a placeholder — see README "Configuration".
+         Loaded async so it never blocks render; the gtag stub queues any
+         calls made before the library arrives.
+         =================================================================== -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <!-- Deferred: execute in order, after parse, without blocking render. -->
+    <script src="/js/params.js" defer></script>
+    <script src="/js/analytics.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Disclaimer appears twice on every page: here at the very top where
+         it cannot be missed, and again in the footer. Mortgage services are
+         regulated; this is server-rendered HTML, never injected by JS. -->
+    <div class="disclaimer-banner">
+      <div class="wrapper">
+        Portfolio demo by 1MR LLC. Not a real financial services firm.
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="wrapper site-header__inner repel">
+        <a class="site-logo" href="/">
+          <svg
+            class="site-logo__mark"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect width="32" height="32" rx="6" fill="#1a4d8f" />
+            <path d="M16 7 6 15h3v10h5v-6h4v6h5V15h3z" fill="#fff" />
+          </svg>
+          <span class="site-logo__text">
+            Meadowbrook
+            <small>Mortgage Demo</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Main">
+          <ul class="cluster">
+            <li><a href="/about">About</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/agents" aria-current="page">For Agents</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a class="button" href="/apply">Apply</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero region">
+        <div class="wrapper flow">
+          <p class="hero__eyebrow">For real estate agents</p>
+          <h1>Send one link. Your buyer lands on a page that already knows them.</h1>
+          <p class="hero__lede">
+            This page explains the referral flow Meadowbrook Mortgage Demo builds for
+            its agent partners: a short link per loan officer, an optional parameter
+            that carries your name, and attribution that follows the buyer all the way
+            to a submitted application.
+          </p>
+        </div>
+      </section>
+
+      <section class="region" aria-labelledby="how-it-works">
+        <div class="wrapper flow">
+          <h2 id="how-it-works">How the flow works</h2>
+          <ol class="grid flow-space-l" data-layout="thirds">
+            <li class="card">
+              <p class="card__meta">Step one</p>
+              <h3 class="card__title">Get a vanity link per loan officer</h3>
+              <p>
+                Each loan officer has a short redirect: <code>/sarah</code>,
+                <code>/marcus</code>, or <code>/jordan</code>. It's short enough to
+                read aloud and to retype correctly if a buyer mistypes it.
+              </p>
+            </li>
+            <li class="card">
+              <p class="card__meta">Step two</p>
+              <h3 class="card__title">Add your name to the link</h3>
+              <p>
+                Append <code>?agent=YourName</code> to any of those links and the
+                landing page greets the buyer with both your name and the loan
+                officer's. Spaces in a name should be URL-encoded, for example
+                <code>%20</code> or <code>+</code>.
+              </p>
+            </li>
+            <li class="card">
+              <p class="card__meta">Step three</p>
+              <h3 class="card__title">Attribution rides to the application</h3>
+              <p>
+                When the buyer taps Apply, both the agent name and loan officer slug
+                carry forward into hidden fields on the application, so the submitted
+                lead always records who sent it.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="region bg-alt" aria-labelledby="worked-example">
+        <div class="wrapper flow">
+          <h2 id="worked-example">A worked example</h2>
+          <p class="measure">
+            A fictional agent, Dana Whitfield, refers a buyer to Sarah Chen. The link
+            Dana sends looks like this:
+          </p>
+          <p>
+            <code>/start?agent=Dana%20Whitfield&amp;lo=sarah</code>
+          </p>
+          <p class="measure">
+            <a href="/start?agent=Dana%20Whitfield&amp;lo=sarah">
+              Open the worked example
+            </a>
+            to see the personalized landing page it produces, then try editing the
+            <code>agent</code> and <code>lo</code> values in the address bar.
+          </p>
+
+          <div class="notice flow-space-l">
+            <p class="notice__title">Encoding your name in a link</p>
+            <p>
+              Use <code>%20</code> or <code>+</code> in place of spaces, and stick to
+              standard letters wherever you can. Most phone keyboards and text apps
+              will encode this automatically when you paste a link, but it's worth
+              double-checking before you send.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="region" aria-labelledby="whats-in-it">
+        <div class="wrapper flow">
+          <h2 id="whats-in-it">What you get out of it</h2>
+          <div class="grid flow-space-l" data-layout="halves">
+            <div class="card card--flat">
+              <h3 class="card__title">A co-branded handoff</h3>
+              <p>
+                Your buyer sees your name on the same page as the loan officer's,
+                instead of landing on a generic homepage that makes no mention of who
+                referred them.
+              </p>
+            </div>
+            <div class="card card--flat">
+              <h3 class="card__title">No login required</h3>
+              <p>
+                There's no portal, no password and nothing to install. The whole flow
+                is a link you can send from any phone.
+              </p>
+            </div>
+            <div class="card card--flat">
+              <h3 class="card__title">Works from a phone, mid-showing</h3>
+              <p>
+                Pages are static and load quickly on a cellular connection, so sending
+                a link between showings takes seconds, not minutes.
+              </p>
+            </div>
+            <div class="card card--flat">
+              <h3 class="card__title">Attribution you can trust</h3>
+              <p>
+                Every submitted application carries the agent and loan officer values
+                forward, so a referral is never lost between the text message and the
+                CRM.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-band region">
+        <div class="wrapper flow text-center">
+          <h2>Ready to send your first link?</h2>
+          <p class="measure" style="margin-inline: auto">
+            Pick a loan officer, add your name, and share the link with your buyer.
+          </p>
+          <div class="cluster flow-space-l" style="justify-content: center">
+            <a class="button" data-variant="invert" data-size="large" href="/team">
+              See the loan officers
+            </a>
+            <a class="button" data-variant="invert" data-size="large" href="/contact">
+              Contact us
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer region">
+      <div class="wrapper flow">
+        <div class="grid" data-layout="thirds">
+          <div class="flow">
+            <h2>Meadowbrook Mortgage Demo</h2>
+            <p>
+              1200 Meadowbrook Court, Suite 210<br />
+              Naperville, IL 60540
+            </p>
+            <p>
+              <a href="tel:+16305550100">(630) 555-0100</a><br />
+              <a href="sms:+16305550100">Text us</a><br />
+              <a href="mailto:hello@meadowbrook-mortgage-demo.example">
+                hello@meadowbrook-mortgage-demo.example
+              </a>
+            </p>
+          </div>
+
+          <div class="flow">
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/about">About</a></li>
+              <li><a href="/team">Our team</a></li>
+              <li><a href="/agents">For agents</a></li>
+              <li><a href="/reviews">Reviews</a></li>
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/calendar">Book a call</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="flow">
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy">Privacy policy</a></li>
+              <li><a href="/terms">Terms of use</a></li>
+              <li><a href="/disclosures">Disclosures</a></li>
+            </ul>
+            <h2 class="flow-space-l">Elsewhere</h2>
+            <ul>
+              <li>
+                <a href="https://1mr.llc" rel="noopener">Built by 1MR LLC</a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/0xjjjjjj/mortgage-referral-demo"
+                  rel="noopener"
+                  >Source on GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="disclaimer">
+          <strong>Portfolio demo by 1MR LLC. Not a real financial services firm.</strong>
+          Meadowbrook Mortgage Demo is a fictional business created to demonstrate static
+          site development, URL personalization and CRM form integration. No content on
+          this site is an offer to lend, a commitment to lend, or financial advice. The
+          loan officers, testimonials, address and phone number are invented.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

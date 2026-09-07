@@ -1,0 +1,419 @@
+<!doctype html>
+<!--
+  ===========================================================================
+  Meadowbrook Mortgage Demo — Reviews (/reviews)
+  Portfolio demo by 1MR LLC. Not a real financial services firm.
+
+  <head>, skip link, disclaimer banner, <header> and <footer> are copied
+  verbatim from index.html, the canonical page template. Only <title>, the
+  meta description, the canonical and og URLs, the nav aria-current marker
+  and the contents of <main> differ. tools/verify.sh enforces that.
+  ===========================================================================
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Client Reviews — Meadowbrook Mortgage Demo Testimonials</title>
+    <meta
+      name="description"
+      content="Six fictional client testimonials written to demonstrate review markup, accessible star ratings, and a schema aggregate rating that matches the page."
+    />
+    <link rel="canonical" href="https://mortgage-referral-demo.pages.dev/reviews" />
+    <meta name="robots" content="index,follow" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#1a4d8f" />
+
+    <!-- Open Graph. og:image is omitted deliberately: this repo carries no
+         binary assets, and a broken image reference is worse than none. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Meadowbrook Mortgage Demo" />
+    <meta
+      property="og:title"
+      content="Client Reviews — Meadowbrook Mortgage Demo Testimonials"
+    />
+    <meta
+      property="og:description"
+      content="Six fictional testimonials demonstrating review markup, accessible star ratings and a matching schema aggregate rating."
+    />
+    <meta property="og:url" content="https://mortgage-referral-demo.pages.dev/reviews" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a4d8f'/%3E%3Cpath d='M16 7 6 15h3v10h5v-6h4v6h5V15h3z' fill='%23fff'/%3E%3C/svg%3E"
+      type="image/svg+xml"
+    />
+
+    <!-- ===================================================================
+         LocalBusiness schema (JSON-LD). Present in the <head> of every page.
+
+         Type MortgageLoanCompany is a subtype of FinancialService, which is
+         itself a LocalBusiness — so this satisfies the LocalBusiness
+         requirement while being maximally specific, which is what Google's
+         structured-data guidance asks for.
+
+         Everything below is fictional. aggregateRating intentionally
+         matches the six testimonials rendered on /reviews; a schema rating
+         count that disagrees with the visible reviews is both a validator
+         warning and, on a real site, a policy problem.
+         =================================================================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MortgageLoanCompany",
+        "@id": "https://mortgage-referral-demo.pages.dev/#organization",
+        "name": "Meadowbrook Mortgage Demo",
+        "description": "A demo of the personalized-referral flow that a small mortgage branch would ship to real estate agent partners.",
+        "url": "https://mortgage-referral-demo.pages.dev/",
+        "telephone": "+1-630-555-0100",
+        "email": "hello@meadowbrook-mortgage-demo.example",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1200 Meadowbrook Court, Suite 210",
+          "addressLocality": "Naperville",
+          "addressRegion": "IL",
+          "postalCode": "60540",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 41.7508,
+          "longitude": -88.1535
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "10:00",
+            "closes": "14:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "6",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "DuPage County, Illinois"
+        },
+        "disambiguatingDescription": "Fictional business used as a portfolio demonstration by 1MR LLC. Not a real financial services firm."
+      }
+    </script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- ===================================================================
+         GA4. Measurement ID is a placeholder — see README "Configuration".
+         Loaded async so it never blocks render; the gtag stub queues any
+         calls made before the library arrives.
+         =================================================================== -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <!-- Deferred: execute in order, after parse, without blocking render. -->
+    <script src="/js/params.js" defer></script>
+    <script src="/js/analytics.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Disclaimer appears twice on every page: here at the very top where
+         it cannot be missed, and again in the footer. Mortgage services are
+         regulated; this is server-rendered HTML, never injected by JS. -->
+    <div class="disclaimer-banner">
+      <div class="wrapper">
+        Portfolio demo by 1MR LLC. Not a real financial services firm.
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="wrapper site-header__inner repel">
+        <a class="site-logo" href="/">
+          <svg
+            class="site-logo__mark"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect width="32" height="32" rx="6" fill="#1a4d8f" />
+            <path d="M16 7 6 15h3v10h5v-6h4v6h5V15h3z" fill="#fff" />
+          </svg>
+          <span class="site-logo__text">
+            Meadowbrook
+            <small>Mortgage Demo</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Main">
+          <ul class="cluster">
+            <li><a href="/about">About</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/agents">For Agents</a></li>
+            <li><a href="/reviews" aria-current="page">Reviews</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a class="button" href="/apply">Apply</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+
+      <section class="region">
+        <div class="wrapper flow">
+          <p class="hero__eyebrow">Reviews</p>
+          <h1>What clients say</h1>
+          <p class="hero__lede measure">
+            Six testimonials, written to demonstrate review markup, accessible star
+            ratings, and a schema aggregate rating that agrees with the reviews actually
+            rendered on the page.
+          </p>
+
+          <div class="notice" data-tone="neutral">
+            <p class="notice__title">These testimonials are fictional</p>
+            <p>
+              Meadowbrook Mortgage Demo is not a real business and has no clients. Every
+              name, quote, rating and date below was invented for this portfolio demo. No
+              real person said any of it.
+            </p>
+          </div>
+
+          <!-- ================================================================
+               PRODUCTION NOTE — WHAT REPLACES THIS SECTION
+
+               On a real branch site this static list would be swapped for live
+               Google reviews, by one of two routes. Neither is free.
+
+               1. GOOGLE PLACES API, server-rendered.
+                  You call the Places Details endpoint yourself and render the
+                  reviews into your own markup. Upside: no third-party
+                  JavaScript on the page, full control of styling, semantics
+                  and heading levels, and the reviews stay in your HTML where
+                  crawlers and screen readers both find them. Cost: the API
+                  key cannot ship to the browser, so it needs a server-side
+                  proxy (a Worker or Function) to hold it; and Places is
+                  billed per request with a quota, so the proxy needs a cache
+                  layer with a sane TTL or a traffic spike turns into a bill.
+                  Places also returns at most five reviews, so an aggregate
+                  count must come from elsewhere.
+
+               2. THIRD-PARTY WIDGET (EmbedSocial, Trustmary and similar).
+                  Paste a script tag, done in ten minutes, and it keeps itself
+                  up to date with no maintenance. Cost: render-blocking
+                  third-party JavaScript on a page whose entire selling point
+                  is that it loads in under a second. It reliably costs
+                  Lighthouse Performance and Best Practices points, it injects
+                  markup whose heading order and contrast you do not control,
+                  and the review content itself now lives on someone else's
+                  server under someone else's uptime and pricing.
+
+               The honest tradeoff: route 1 costs engineering time up front and
+               keeps the page fast and under your control; route 2 costs page
+               speed and control forever and keeps engineering time at zero.
+               For a site this small, route 1 is usually right — but only if
+               somebody is willing to own the proxy.
+
+               This demo calls neither. The markup below is hand-written.
+               ============================================================ -->
+          <ul class="grid list-plain flow-space-l" data-layout="thirds">
+            <li class="card review-card flow">
+              <h2 class="card__title">Priya Raman</h2>
+              <p>
+                <span class="rating" aria-hidden="true">★★★★★</span>
+                <span class="visually-hidden">Rated 5 out of 5</span>
+              </p>
+              <blockquote>
+                <p>
+                  Our agent sent one link and the whole thing started from there. Someone
+                  called us by name the same afternoon and explained each step before we
+                  had to ask.
+                </p>
+              </blockquote>
+              <p class="review-card__footer">First-time buyer · March 2025</p>
+            </li>
+
+            <li class="card review-card flow">
+              <h2 class="card__title">Daniel Okafor</h2>
+              <p>
+                <span class="rating" aria-hidden="true">★★★★★</span>
+                <span class="visually-hidden">Rated 5 out of 5</span>
+              </p>
+              <blockquote>
+                <p>
+                  Straight answers, no jargon, and nobody tried to rush us. When we had a
+                  question at eight in the evening we got a reply the next morning with the
+                  detail we actually needed.
+                </p>
+              </blockquote>
+              <p class="review-card__footer">Move-up buyer · April 2025</p>
+            </li>
+
+            <li class="card review-card flow">
+              <h2 class="card__title">Megan Sullivan</h2>
+              <p>
+                <span class="rating" aria-hidden="true">★★★★★</span>
+                <span class="visually-hidden">Rated 5 out of 5</span>
+              </p>
+              <blockquote>
+                <p>
+                  The paperwork list arrived before we asked for it, which saved us a week
+                  of guessing. Everything we were told to expect is what actually happened.
+                </p>
+              </blockquote>
+              <p class="review-card__footer">Condo purchase · May 2025</p>
+            </li>
+
+            <li class="card review-card flow">
+              <h2 class="card__title">Carlos Mendoza</h2>
+              <p>
+                <span class="rating" aria-hidden="true">★★★★★</span>
+                <span class="visually-hidden">Rated 5 out of 5</span>
+              </p>
+              <blockquote>
+                <p>
+                  I am self-employed, so I have been through this before and it is usually
+                  painful. This time somebody told me up front exactly what they needed and
+                  why, and then stuck to it.
+                </p>
+              </blockquote>
+              <p class="review-card__footer">Self-employed borrower · June 2025</p>
+            </li>
+
+            <li class="card review-card flow">
+              <h2 class="card__title">Anne Delacroix</h2>
+              <p>
+                <span class="rating" aria-hidden="true">★★★★☆</span>
+                <span class="visually-hidden">Rated 4 out of 5</span>
+              </p>
+              <blockquote>
+                <p>
+                  Genuinely helpful people and a smooth process overall. It went quiet for
+                  a couple of days in the middle and I would have liked a check-in, but
+                  every question I did ask was answered properly.
+                </p>
+              </blockquote>
+              <p class="review-card__footer">Refinance enquiry · June 2025</p>
+            </li>
+
+            <li class="card review-card flow">
+              <h2 class="card__title">Trevor Blake</h2>
+              <p>
+                <span class="rating" aria-hidden="true">★★★★★</span>
+                <span class="visually-hidden">Rated 5 out of 5</span>
+              </p>
+              <blockquote>
+                <p>
+                  As the listing agent I have referred several buyers now. I get told when
+                  something moves instead of having to chase it, and that is most of what I
+                  want from a lending partner.
+                </p>
+              </blockquote>
+              <p class="review-card__footer">Referring real estate agent · July 2025</p>
+            </li>
+          </ul>
+
+          <h2 class="flow-space-xl">Why the average is 4.8</h2>
+          <p class="measure">
+            Five of the six testimonials above are rated five stars and one is rated four,
+            which is 29 stars across 6 reviews, or 4.83 — 4.8 to one decimal place. That is
+            the same figure carried in this site's <code>aggregateRating</code> structured
+            data, with a <code>reviewCount</code> of 6. A schema rating that disagrees with
+            the reviews a visitor can actually count on the page is both a validator
+            warning and, on a real site, a policy problem.
+          </p>
+
+          <p class="text-muted flow-space-l">
+            Nothing on this page is an offer to lend, a commitment to lend, or financial
+            advice.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer region">
+      <div class="wrapper flow">
+        <div class="grid" data-layout="thirds">
+          <div class="flow">
+            <h2>Meadowbrook Mortgage Demo</h2>
+            <p>
+              1200 Meadowbrook Court, Suite 210<br />
+              Naperville, IL 60540
+            </p>
+            <p>
+              <a href="tel:+16305550100">(630) 555-0100</a><br />
+              <a href="sms:+16305550100">Text us</a><br />
+              <a href="mailto:hello@meadowbrook-mortgage-demo.example">
+                hello@meadowbrook-mortgage-demo.example
+              </a>
+            </p>
+          </div>
+
+          <div class="flow">
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/about">About</a></li>
+              <li><a href="/team">Our team</a></li>
+              <li><a href="/agents">For agents</a></li>
+              <li><a href="/reviews">Reviews</a></li>
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/calendar">Book a call</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="flow">
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy">Privacy policy</a></li>
+              <li><a href="/terms">Terms of use</a></li>
+              <li><a href="/disclosures">Disclosures</a></li>
+            </ul>
+            <h2 class="flow-space-l">Elsewhere</h2>
+            <ul>
+              <li>
+                <a href="https://1mr.llc" rel="noopener">Built by 1MR LLC</a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/0xjjjjjj/mortgage-referral-demo"
+                  rel="noopener"
+                  >Source on GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="disclaimer">
+          <strong>Portfolio demo by 1MR LLC. Not a real financial services firm.</strong>
+          Meadowbrook Mortgage Demo is a fictional business created to demonstrate static
+          site development, URL personalization and CRM form integration. No content on
+          this site is an offer to lend, a commitment to lend, or financial advice. The
+          loan officers, testimonials, address and phone number are invented.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

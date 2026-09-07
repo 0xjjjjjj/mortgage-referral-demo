@@ -1,0 +1,393 @@
+<!doctype html>
+<!--
+  ===========================================================================
+  Meadowbrook Mortgage Demo — Privacy policy (/privacy)
+  Portfolio demo by 1MR LLC. Not a real financial services firm.
+
+  <head>, skip link, disclaimer banner, <header> and <footer> are copied
+  verbatim from index.html, the canonical page template. Only <title>, the
+  meta description, the canonical and og URLs, the nav aria-current marker
+  and the contents of <main> differ. tools/verify.sh enforces that.
+  ===========================================================================
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Privacy Policy Sample — Meadowbrook Mortgage Demo Site</title>
+    <meta
+      name="description"
+      content="An illustrative privacy policy covering form submissions, analytics cookies, third-party processors, retention and user rights. This demo transmits nothing."
+    />
+    <link rel="canonical" href="https://mortgage-referral-demo.pages.dev/privacy" />
+    <meta name="robots" content="index,follow" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#1a4d8f" />
+
+    <!-- Open Graph. og:image is omitted deliberately: this repo carries no
+         binary assets, and a broken image reference is worse than none. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Meadowbrook Mortgage Demo" />
+    <meta
+      property="og:title"
+      content="Privacy Policy Sample — Meadowbrook Mortgage Demo Site"
+    />
+    <meta
+      property="og:description"
+      content="An illustrative privacy policy covering form submissions, analytics, processors, retention and user rights. This demo transmits nothing."
+    />
+    <meta property="og:url" content="https://mortgage-referral-demo.pages.dev/privacy" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a4d8f'/%3E%3Cpath d='M16 7 6 15h3v10h5v-6h4v6h5V15h3z' fill='%23fff'/%3E%3C/svg%3E"
+      type="image/svg+xml"
+    />
+
+    <!-- ===================================================================
+         LocalBusiness schema (JSON-LD). Present in the <head> of every page.
+
+         Type MortgageLoanCompany is a subtype of FinancialService, which is
+         itself a LocalBusiness — so this satisfies the LocalBusiness
+         requirement while being maximally specific, which is what Google's
+         structured-data guidance asks for.
+
+         Everything below is fictional. aggregateRating intentionally
+         matches the six testimonials rendered on /reviews; a schema rating
+         count that disagrees with the visible reviews is both a validator
+         warning and, on a real site, a policy problem.
+         =================================================================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MortgageLoanCompany",
+        "@id": "https://mortgage-referral-demo.pages.dev/#organization",
+        "name": "Meadowbrook Mortgage Demo",
+        "description": "A demo of the personalized-referral flow that a small mortgage branch would ship to real estate agent partners.",
+        "url": "https://mortgage-referral-demo.pages.dev/",
+        "telephone": "+1-630-555-0100",
+        "email": "hello@meadowbrook-mortgage-demo.example",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1200 Meadowbrook Court, Suite 210",
+          "addressLocality": "Naperville",
+          "addressRegion": "IL",
+          "postalCode": "60540",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 41.7508,
+          "longitude": -88.1535
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "10:00",
+            "closes": "14:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "6",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "DuPage County, Illinois"
+        },
+        "disambiguatingDescription": "Fictional business used as a portfolio demonstration by 1MR LLC. Not a real financial services firm."
+      }
+    </script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- ===================================================================
+         GA4. Measurement ID is a placeholder — see README "Configuration".
+         Loaded async so it never blocks render; the gtag stub queues any
+         calls made before the library arrives.
+         =================================================================== -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <!-- Deferred: execute in order, after parse, without blocking render. -->
+    <script src="/js/params.js" defer></script>
+    <script src="/js/analytics.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Disclaimer appears twice on every page: here at the very top where
+         it cannot be missed, and again in the footer. Mortgage services are
+         regulated; this is server-rendered HTML, never injected by JS. -->
+    <div class="disclaimer-banner">
+      <div class="wrapper">
+        Portfolio demo by 1MR LLC. Not a real financial services firm.
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="wrapper site-header__inner repel">
+        <a class="site-logo" href="/">
+          <svg
+            class="site-logo__mark"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect width="32" height="32" rx="6" fill="#1a4d8f" />
+            <path d="M16 7 6 15h3v10h5v-6h4v6h5V15h3z" fill="#fff" />
+          </svg>
+          <span class="site-logo__text">
+            Meadowbrook
+            <small>Mortgage Demo</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Main">
+          <ul class="cluster">
+            <li><a href="/about">About</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/agents">For Agents</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a class="button" href="/apply">Apply</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+
+      <section class="region">
+        <div class="wrapper" data-width="narrow">
+          <div class="prose flow">
+            <p class="hero__eyebrow">Legal</p>
+            <h1>Privacy policy</h1>
+
+            <div class="notice">
+              <p class="notice__title">This is a sample document, not a real policy</p>
+              <p>
+                Meadowbrook Mortgage Demo is a fictional business created as a portfolio
+                demonstration by 1MR LLC. It is not a real financial services firm. The
+                text below is an illustrative sample showing the shape a privacy policy
+                takes on a site of this kind. It is not legal advice, it is not an
+                enforceable policy, and it governs nothing.
+              </p>
+              <p>
+                <strong>This demo transmits nothing.</strong> The application form is a
+                non-functional mock with no destination. No submission is sent, stored or
+                forwarded. Please do not enter real personal or financial information
+                anywhere on this site.
+              </p>
+            </div>
+
+            <p class="text-muted">Last reviewed: September 2025.</p>
+
+            <h2>What a real site would collect</h2>
+            <p>
+              A working version of this site would handle two broad categories of
+              information.
+            </p>
+            <h3>Information you provide</h3>
+            <p>
+              Whatever you type into the application form or send by email, text or phone.
+              On a mortgage site that typically includes your name, email address, phone
+              number and a description of what you are trying to do, plus the referring
+              agent and loan officer carried in the link you followed.
+            </p>
+            <h3>Information collected automatically</h3>
+            <p>
+              Standard web analytics: pages viewed, approximate location derived from IP
+              address, referring URL, device and browser type, and interactions such as
+              tapping a call, text or apply button. This is aggregate behaviour data, not
+              file content.
+            </p>
+
+            <h2>Cookies and similar technologies</h2>
+            <p>
+              A live deployment would set analytics cookies through Google Analytics 4 to
+              distinguish one visit from another and to measure whether the referral flow
+              works. It would not use advertising or cross-site tracking cookies.
+            </p>
+            <p>
+              You can block or delete cookies in your browser settings. Doing so affects
+              measurement only; the pages themselves continue to work, because none of the
+              content on this site depends on a cookie.
+            </p>
+
+            <h2>Third-party processors</h2>
+            <p>
+              A real version of this site would share information with a small number of
+              service providers, each processing it only to provide their service:
+            </p>
+            <ul>
+              <li>
+                <strong>HubSpot</strong> — CRM and form handling. Application submissions,
+                including the referring agent and loan officer, would be stored there.
+              </li>
+              <li>
+                <strong>Google Analytics 4</strong> — aggregate usage measurement. No form
+                field contents are sent to analytics.
+              </li>
+              <li>
+                <strong>Cloudflare Pages</strong> — static hosting and content delivery,
+                which processes request metadata such as IP address in the ordinary course
+                of serving a page.
+              </li>
+            </ul>
+            <p>
+              Information would not be sold, rented or traded. It would be disclosed to
+              others only where required by law or with your consent.
+            </p>
+
+            <h2>Retention</h2>
+            <p>
+              A real firm would keep enquiry records only as long as needed for the purpose
+              they were collected for, and for any period required by applicable financial
+              services record-keeping rules, then delete or anonymise them. Analytics data
+              would be kept for a bounded retention window configured in the analytics
+              account.
+            </p>
+
+            <h2>Your rights</h2>
+            <p>
+              Depending on where you live, you may have the right to ask what personal
+              information is held about you, to receive a copy of it, to have inaccuracies
+              corrected, to have it deleted, to object to or restrict certain processing,
+              and to opt out of marketing messages at any time. A real firm would tell you
+              how to exercise those rights and would not treat you differently for doing
+              so.
+            </p>
+
+            <h2>Security</h2>
+            <p>
+              A live site would be served over HTTPS, would limit access to submitted
+              enquiries to the people who need it, and would rely on its CRM provider's
+              controls for data at rest. No system is perfectly secure, and any honest
+              policy says so.
+            </p>
+
+            <h2>Children</h2>
+            <p>
+              A site of this kind is directed at adults and would not knowingly collect
+              information from children.
+            </p>
+
+            <h2>Changes to this document</h2>
+            <p>
+              A real policy would be updated from time to time, with the revision date at
+              the top changed to match.
+            </p>
+
+            <h2>Contact</h2>
+            <p>
+              Because this business is fictional, the contact details below reach nobody.
+              They are included to show where a real policy would put them.
+            </p>
+            <p>
+              Meadowbrook Mortgage Demo<br />
+              1200 Meadowbrook Court, Suite 210<br />
+              Naperville, IL 60540<br />
+              <a href="tel:+16305550100">(630) 555-0100</a><br />
+              <a href="mailto:hello@meadowbrook-mortgage-demo.example">
+                hello@meadowbrook-mortgage-demo.example
+              </a>
+            </p>
+
+            <p class="text-muted">
+              See also the <a href="/terms">sample terms of use</a> and the
+              <a href="/disclosures">sample disclosures</a>.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer region">
+      <div class="wrapper flow">
+        <div class="grid" data-layout="thirds">
+          <div class="flow">
+            <h2>Meadowbrook Mortgage Demo</h2>
+            <p>
+              1200 Meadowbrook Court, Suite 210<br />
+              Naperville, IL 60540
+            </p>
+            <p>
+              <a href="tel:+16305550100">(630) 555-0100</a><br />
+              <a href="sms:+16305550100">Text us</a><br />
+              <a href="mailto:hello@meadowbrook-mortgage-demo.example">
+                hello@meadowbrook-mortgage-demo.example
+              </a>
+            </p>
+          </div>
+
+          <div class="flow">
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/about">About</a></li>
+              <li><a href="/team">Our team</a></li>
+              <li><a href="/agents">For agents</a></li>
+              <li><a href="/reviews">Reviews</a></li>
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/calendar">Book a call</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="flow">
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy">Privacy policy</a></li>
+              <li><a href="/terms">Terms of use</a></li>
+              <li><a href="/disclosures">Disclosures</a></li>
+            </ul>
+            <h2 class="flow-space-l">Elsewhere</h2>
+            <ul>
+              <li>
+                <a href="https://1mr.llc" rel="noopener">Built by 1MR LLC</a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/0xjjjjjj/mortgage-referral-demo"
+                  rel="noopener"
+                  >Source on GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="disclaimer">
+          <strong>Portfolio demo by 1MR LLC. Not a real financial services firm.</strong>
+          Meadowbrook Mortgage Demo is a fictional business created to demonstrate static
+          site development, URL personalization and CRM form integration. No content on
+          this site is an offer to lend, a commitment to lend, or financial advice. The
+          loan officers, testimonials, address and phone number are invented.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

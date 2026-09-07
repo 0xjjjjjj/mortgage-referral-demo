@@ -1,0 +1,1006 @@
+/* =========================================================================
+   Meadowbrook Mortgage Demo — stylesheet
+   Portfolio demo by 1MR LLC. Not a real financial services firm.
+
+   Architecture: CUBE CSS (Composition, Utility, Block, Exception), after
+   Andy Bell's buildexcellentwebsit.es. Layer order below is deliberate and
+   load-bearing — later layers are allowed to override earlier ones:
+
+     1. RESET          normalize browser defaults
+     2. TOKENS         design tokens as custom properties (the reskin surface)
+     3. GLOBAL         unclassed element styles
+     4. COMPOSITIONS   layout primitives, no cosmetics (Every Layout)
+     5. BLOCKS         named components
+     6. UTILITIES      single-purpose classes
+     7. EXCEPTIONS     data-attribute variants
+
+   No preprocessor, no build step. Every value that a re-skin would change
+   lives in the TOKENS layer, so retargeting this site to another business
+   means editing one block plus the copy.
+   ========================================================================= */
+
+/* =========================================================================
+   1. RESET
+   ========================================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.2;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul[class],
+ol[class] {
+  list-style: none;
+  padding: 0;
+}
+
+:target {
+  scroll-margin-block: 5ex;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================================================
+   2. TOKENS  — the entire re-skin surface. See tools/reskin.sh
+   ========================================================================= */
+
+:root {
+  /* --- Color primitives -------------------------------------------------
+     Professional blue / gray / white. Contrast ratios against --color-bg
+     (#ffffff) are noted where they matter for WCAG AA compliance. */
+  --color-blue-900: #0d2b4e;
+  --color-blue-800: #123a68; /* 11.4:1 on white */
+  --color-blue-700: #1a4d8f; /* 7.6:1  on white — primary */
+  --color-blue-600: #2463b0;
+  --color-blue-100: #e8f0f9;
+  --color-blue-050: #f4f8fc;
+
+  --color-gray-900: #14181d;
+  --color-gray-800: #262d36;
+  --color-gray-700: #3d4652; /* 9.2:1 on white — body text */
+  --color-gray-600: #5b6674; /* 5.4:1 on white — muted text, AA at 16px */
+  --color-gray-400: #96a0ad;
+  --color-gray-300: #c8cfd8;
+  --color-gray-200: #e2e7ec;
+  --color-gray-100: #f2f5f8;
+  --color-white: #ffffff;
+
+  --color-gold-600: #b8860b; /* rating stars — 4.6:1 on white */
+  --color-green-700: #1c6b45;
+
+  /* --- Semantic aliases --- */
+  --color-bg: var(--color-white);
+  --color-bg-alt: var(--color-gray-100);
+  --color-bg-brand: var(--color-blue-050);
+  --color-text: var(--color-gray-700);
+  --color-text-strong: var(--color-gray-900);
+  --color-text-muted: var(--color-gray-600);
+  --color-text-invert: var(--color-white);
+  --color-primary: var(--color-blue-700);
+  --color-primary-hover: var(--color-blue-800);
+  --color-primary-dark: var(--color-blue-900);
+  --color-border: var(--color-gray-200);
+  --color-border-strong: var(--color-gray-300);
+  --color-focus: var(--color-blue-600);
+
+  /* --- Typography -------------------------------------------------------
+     System font stack only. No Google Fonts: zero third-party requests,
+     zero layout shift from font swap, no GDPR question about IP addresses
+     being sent to a font CDN. */
+  --font-base:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+
+  /* Fluid type scale. clamp(min, preferred, max) — each step scales between
+     a 320px and a 1240px viewport with no media queries. */
+  --size-step--1: clamp(0.83rem, 0.81rem + 0.11vw, 0.89rem);
+  --size-step-0: clamp(1rem, 0.96rem + 0.22vw, 1.13rem);
+  --size-step-1: clamp(1.2rem, 1.13rem + 0.37vw, 1.42rem);
+  --size-step-2: clamp(1.44rem, 1.32rem + 0.58vw, 1.78rem);
+  --size-step-3: clamp(1.73rem, 1.54rem + 0.93vw, 2.23rem);
+  --size-step-4: clamp(2.07rem, 1.79rem + 1.42vw, 2.79rem);
+  --size-step-5: clamp(2.49rem, 2.06rem + 2.13vw, 3.48rem);
+
+  /* --- Fluid space scale --- */
+  --space-3xs: clamp(0.25rem, 0.24rem + 0.06vw, 0.31rem);
+  --space-2xs: clamp(0.5rem, 0.48rem + 0.11vw, 0.56rem);
+  --space-xs: clamp(0.75rem, 0.72rem + 0.16vw, 0.88rem);
+  --space-s: clamp(1rem, 0.96rem + 0.22vw, 1.13rem);
+  --space-m: clamp(1.5rem, 1.44rem + 0.33vw, 1.69rem);
+  --space-l: clamp(2rem, 1.91rem + 0.43vw, 2.25rem);
+  --space-xl: clamp(3rem, 2.87rem + 0.65vw, 3.38rem);
+  --space-2xl: clamp(4rem, 3.83rem + 0.87vw, 4.5rem);
+  --space-3xl: clamp(6rem, 5.74rem + 1.3vw, 6.75rem);
+
+  /* --- Other --- */
+  --wrapper-width: 72rem;
+  --wrapper-gutter: clamp(1rem, 5vw, 2.5rem);
+  --radius-s: 4px;
+  --radius-m: 8px;
+  --radius-l: 16px;
+  --radius-pill: 100vmax;
+  --shadow-s: 0 1px 2px rgb(13 43 78 / 8%), 0 2px 6px rgb(13 43 78 / 6%);
+  --shadow-m: 0 2px 4px rgb(13 43 78 / 8%), 0 8px 24px rgb(13 43 78 / 10%);
+  --transition: 180ms ease;
+  --border-thin: 1px solid var(--color-border);
+}
+
+/* =========================================================================
+   3. GLOBAL
+   ========================================================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-base);
+  font-size: var(--size-step-0);
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--color-text-strong);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: var(--size-step-5);
+}
+h2 {
+  font-size: var(--size-step-3);
+}
+h3 {
+  font-size: var(--size-step-2);
+}
+h4 {
+  font-size: var(--size-step-1);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+/* Visible focus ring on every interactive element. Never remove this —
+   it is the single highest-value accessibility affordance on the site. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-s);
+}
+
+hr {
+  height: 1px;
+  border: 0;
+  margin-block: var(--space-l);
+  background-color: var(--color-border);
+}
+
+strong {
+  color: var(--color-text-strong);
+  font-weight: 600;
+}
+
+blockquote {
+  margin: 0;
+  padding-inline-start: var(--space-m);
+  border-inline-start: 3px solid var(--color-primary);
+  color: var(--color-text-strong);
+  font-style: italic;
+}
+
+code,
+kbd,
+samp {
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-s);
+  background-color: var(--color-gray-100);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+pre {
+  overflow-x: auto;
+  padding: var(--space-s);
+  border: var(--border-thin);
+  border-radius: var(--radius-m);
+  background-color: var(--color-gray-100);
+}
+
+pre code {
+  padding: 0;
+  background: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: var(--space-2xs) var(--space-xs);
+  border-bottom: var(--border-thin);
+  text-align: start;
+}
+
+th {
+  color: var(--color-text-strong);
+  font-weight: 600;
+}
+
+/* =========================================================================
+   4. COMPOSITIONS  — layout only, zero cosmetics
+   ========================================================================= */
+
+/* WRAPPER — centered max-width container with consistent gutters. */
+.wrapper {
+  width: min(var(--wrapper-width), 100% - var(--wrapper-gutter) * 2);
+  margin-inline: auto;
+}
+
+.wrapper[data-width="narrow"] {
+  --wrapper-width: 46rem;
+}
+
+/* FLOW — vertical rhythm between siblings. Override per-element with
+   --flow-space. https://piccalil.li/quick-tip/flow-utility/ */
+.flow > * + * {
+  margin-block-start: var(--flow-space, var(--space-s));
+}
+
+/* REGION — consistent vertical padding for page sections. */
+.region {
+  padding-block: var(--region-space, var(--space-2xl));
+}
+
+/* GRID — auto-fill responsive grid, no media queries. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(
+    var(--grid-placement, auto-fill),
+    minmax(var(--grid-min-item-size, 16rem), 1fr)
+  );
+  gap: var(--gutter, var(--space-m));
+}
+
+.grid[data-layout="halves"] {
+  --grid-placement: auto-fit;
+  --grid-min-item-size: clamp(16rem, 45%, 28rem);
+}
+
+.grid[data-layout="thirds"] {
+  --grid-placement: auto-fit;
+  --grid-min-item-size: clamp(14rem, 30%, 20rem);
+}
+
+/* CLUSTER — wrapping horizontal group. */
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: var(--cluster-align, center);
+  justify-content: var(--cluster-justify, flex-start);
+  gap: var(--gutter, var(--space-s));
+}
+
+/* REPEL — pushes children apart, wraps gracefully on narrow screens. */
+.repel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: var(--repel-align, center);
+  justify-content: space-between;
+  gap: var(--gutter, var(--space-s));
+}
+
+/* SIDEBAR — two columns that collapse to one without a media query. */
+.sidebar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter, var(--space-l));
+}
+
+.sidebar > :first-child {
+  flex-basis: var(--sidebar-width, 18rem);
+  flex-grow: 1;
+}
+
+.sidebar > :last-child {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-inline-size: var(--sidebar-content-min, 60%);
+}
+
+/* =========================================================================
+   5. BLOCKS
+   ========================================================================= */
+
+/* --- Skip link — first focusable element on every page. --------------- */
+.skip-link {
+  position: absolute;
+  top: var(--space-2xs);
+  left: var(--space-2xs);
+  z-index: 100;
+  padding: var(--space-2xs) var(--space-s);
+  border-radius: var(--radius-m);
+  background-color: var(--color-primary);
+  color: var(--color-text-invert);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--transition);
+}
+
+.skip-link:focus {
+  color: var(--color-text-invert);
+  transform: translateY(0);
+}
+
+/* --- Site header ------------------------------------------------------ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: var(--border-thin);
+  background-color: rgb(255 255 255 / 92%);
+  backdrop-filter: blur(8px);
+}
+
+.site-header__inner {
+  --gutter: var(--space-s);
+  padding-block: var(--space-xs);
+}
+
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  color: var(--color-primary-dark);
+  font-size: var(--size-step-1);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+
+.site-logo__mark {
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.site-logo__text small {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: var(--size-step--1);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* --- Primary navigation ----------------------------------------------- */
+.site-nav ul {
+  --gutter: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* :not(.button) is load-bearing. `.site-nav a` outranks `.button` on
+   specificity (0,1,1 vs 0,1,0), so without it the nav's dark text color and
+   smaller font-size win over the Apply button's own styles, dropping it to a
+   1.13:1 contrast ratio. Caught by Lighthouse, not by eye. */
+.site-nav a:not(.button) {
+  display: inline-block;
+  padding: var(--space-3xs) var(--space-2xs);
+  color: var(--color-text);
+  font-size: var(--size-step--1);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.site-nav a:not(.button):hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* aria-current is the source of truth for the active page — the styling
+   hangs off the accessibility attribute rather than a duplicate class. */
+.site-nav a:not(.button)[aria-current="page"] {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* --- Buttons ---------------------------------------------------------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs);
+  /* min-height 44px satisfies the WCAG 2.5.5 / iOS HIG tap-target floor. */
+  min-height: 44px;
+  padding: var(--space-2xs) var(--space-m);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-m);
+  background-color: var(--color-primary);
+  color: var(--color-text-invert);
+  font-size: var(--size-step-0);
+  font-weight: 600;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--transition),
+    border-color var(--transition),
+    transform var(--transition);
+}
+
+.button:hover {
+  border-color: var(--color-primary-hover);
+  background-color: var(--color-primary-hover);
+  color: var(--color-text-invert);
+  transform: translateY(-1px);
+}
+
+.button[data-variant="secondary"] {
+  background-color: transparent;
+  color: var(--color-primary);
+}
+
+.button[data-variant="secondary"]:hover {
+  background-color: var(--color-blue-050);
+  color: var(--color-primary-hover);
+}
+
+.button[data-variant="invert"] {
+  border-color: var(--color-white);
+  background-color: var(--color-white);
+  color: var(--color-primary-dark);
+}
+
+.button[data-variant="invert"]:hover {
+  background-color: transparent;
+  color: var(--color-white);
+}
+
+.button[data-size="large"] {
+  min-height: 56px;
+  padding: var(--space-s) var(--space-xl);
+  font-size: var(--size-step-1);
+}
+
+/* --- Hero ------------------------------------------------------------- */
+.hero {
+  --region-space: var(--space-2xl);
+  background:
+    linear-gradient(
+      160deg,
+      var(--color-blue-050) 0%,
+      var(--color-blue-100) 100%
+    );
+  border-bottom: var(--border-thin);
+}
+
+.hero__eyebrow {
+  color: var(--color-primary);
+  font-size: var(--size-step--1);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero__lede {
+  max-width: 48ch;
+  font-size: var(--size-step-1);
+  color: var(--color-text);
+}
+
+/* --- Cards ------------------------------------------------------------ */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  height: 100%;
+  padding: var(--space-m);
+  border: var(--border-thin);
+  border-radius: var(--radius-l);
+  background-color: var(--color-bg);
+  box-shadow: var(--shadow-s);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-m);
+  transform: translateY(-2px);
+}
+
+.card__title {
+  font-size: var(--size-step-1);
+}
+
+.card__meta {
+  color: var(--color-text-muted);
+  font-size: var(--size-step--1);
+}
+
+.card--flat {
+  box-shadow: none;
+}
+
+.card--flat:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+/* --- Officer card / avatar -------------------------------------------- */
+.officer-card {
+  align-items: center;
+  text-align: center;
+}
+
+.avatar {
+  width: var(--avatar-size, 7rem);
+  height: var(--avatar-size, 7rem);
+  border-radius: 50%;
+  background-color: var(--color-blue-100);
+  overflow: hidden;
+}
+
+.avatar[data-size="large"] {
+  --avatar-size: 10rem;
+}
+
+/* --- Rating stars ------------------------------------------------------
+   The visual stars are aria-hidden; an adjacent .visually-hidden element
+   carries the real text ("Rated 5 out of 5"). Screen readers must never
+   have to interpret glyph soup. */
+.rating {
+  display: inline-flex;
+  gap: 0.1em;
+  color: var(--color-gold-600);
+  font-size: var(--size-step-0);
+  letter-spacing: 0.05em;
+}
+
+/* --- Review card ------------------------------------------------------ */
+.review-card blockquote {
+  padding: 0;
+  border: 0;
+  font-style: normal;
+  color: var(--color-text);
+}
+
+.review-card__footer {
+  margin-block-start: auto;
+  padding-block-start: var(--space-xs);
+  border-block-start: var(--border-thin);
+  color: var(--color-text-muted);
+  font-size: var(--size-step--1);
+}
+
+/* --- FAQ (native details/summary — no JavaScript) --------------------- */
+.faq-item {
+  border-bottom: var(--border-thin);
+}
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  min-height: 44px;
+  padding-block: var(--space-s);
+  color: var(--color-text-strong);
+  font-size: var(--size-step-1);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  flex-shrink: 0;
+  color: var(--color-primary);
+  font-size: var(--size-step-2);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.faq-item[open] summary::after {
+  content: "\2212"; /* minus sign */
+}
+
+.faq-item__body {
+  padding-block-end: var(--space-s);
+  max-width: 70ch;
+}
+
+/* --- Post list -------------------------------------------------------- */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  padding: 0;
+  list-style: none;
+}
+
+.post-list__item {
+  padding-block-end: var(--space-m);
+  border-bottom: var(--border-thin);
+}
+
+.post-list__item:last-child {
+  border-bottom: 0;
+}
+
+.post-list__title {
+  font-size: var(--size-step-2);
+}
+
+.post-list__title a {
+  color: var(--color-text-strong);
+  text-decoration: none;
+}
+
+.post-list__title a:hover {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+/* --- Prose (long-form article body) ----------------------------------- */
+.prose {
+  max-width: 68ch;
+}
+
+.prose > * + * {
+  margin-block-start: var(--space-s);
+}
+
+.prose h2 {
+  --flow-space: var(--space-l);
+  margin-block-start: var(--space-l);
+  font-size: var(--size-step-2);
+}
+
+.prose h3 {
+  margin-block-start: var(--space-m);
+  font-size: var(--size-step-1);
+}
+
+.prose ul,
+.prose ol {
+  padding-inline-start: var(--space-m);
+}
+
+.prose li + li {
+  margin-block-start: var(--space-2xs);
+}
+
+/* --- CTA band --------------------------------------------------------- */
+.cta-band {
+  --region-space: var(--space-2xl);
+  background-color: var(--color-primary-dark);
+  color: var(--color-blue-100);
+}
+
+.cta-band h2 {
+  color: var(--color-white);
+}
+
+.cta-band a:not(.button) {
+  color: var(--color-white);
+}
+
+/* --- Personalized greeting (/start) ----------------------------------- */
+.greeting {
+  padding: var(--space-m);
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-l);
+  background-color: var(--color-blue-050);
+}
+
+.greeting__headline {
+  font-size: var(--size-step-3);
+}
+
+/* --- Form mock (/apply) ----------------------------------------------- */
+.form-mock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  padding: var(--space-m);
+  border: var(--border-thin);
+  border-radius: var(--radius-l);
+  background-color: var(--color-bg);
+  box-shadow: var(--shadow-s);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xs);
+}
+
+.form-field label {
+  color: var(--color-text-strong);
+  font-size: var(--size-step--1);
+  font-weight: 600;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  min-height: 44px;
+  padding: var(--space-2xs) var(--space-xs);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-m);
+  background-color: var(--color-bg);
+}
+
+.form-field input:disabled {
+  background-color: var(--color-gray-100);
+  color: var(--color-text-muted);
+}
+
+/* --- Notice / callout ------------------------------------------------- */
+.notice {
+  padding: var(--space-s) var(--space-m);
+  border-inline-start: 4px solid var(--color-primary);
+  border-radius: var(--radius-m);
+  background-color: var(--color-blue-050);
+  font-size: var(--size-step--1);
+}
+
+.notice[data-tone="neutral"] {
+  border-inline-start-color: var(--color-gray-400);
+  background-color: var(--color-gray-100);
+}
+
+.notice__title {
+  color: var(--color-text-strong);
+  font-size: var(--size-step-0);
+  font-weight: 700;
+}
+
+/* --- Debug strip (integration preview on /apply and /start) ----------- */
+.debug-strip {
+  padding: var(--space-s);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-m);
+  background-color: var(--color-gray-100);
+  font-family: var(--font-mono);
+  font-size: var(--size-step--1);
+  overflow-x: auto;
+}
+
+.debug-strip dt {
+  color: var(--color-text-muted);
+}
+
+.debug-strip dd {
+  margin: 0 0 var(--space-2xs);
+  color: var(--color-text-strong);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* --- Site footer ------------------------------------------------------ */
+.site-footer {
+  --region-space: var(--space-xl);
+  margin-block-start: var(--space-2xl);
+  border-top: var(--border-thin);
+  background-color: var(--color-gray-100);
+  font-size: var(--size-step--1);
+}
+
+.site-footer h2 {
+  font-size: var(--size-step-0);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.site-footer ul {
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer li + li {
+  margin-block-start: var(--space-3xs);
+}
+
+.site-footer a {
+  color: var(--color-text);
+}
+
+.site-footer a:hover {
+  color: var(--color-primary);
+}
+
+/* --- Demo disclaimer — required on every page, must never be hidden --- */
+.disclaimer {
+  padding: var(--space-xs) 0;
+  border-block-start: var(--border-thin);
+  color: var(--color-text-muted);
+  font-size: var(--size-step--1);
+}
+
+.disclaimer strong {
+  color: var(--color-text-strong);
+}
+
+.disclaimer-banner {
+  padding: var(--space-3xs) 0;
+  background-color: var(--color-gray-800);
+  color: var(--color-gray-100);
+  font-size: var(--size-step--1);
+  text-align: center;
+}
+
+/* =========================================================================
+   6. UTILITIES
+   ========================================================================= */
+
+.visually-hidden:not(:focus):not(:active) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.measure {
+  max-width: 65ch;
+}
+
+.flow-space-l {
+  --flow-space: var(--space-l);
+}
+
+.flow-space-xl {
+  --flow-space: var(--space-xl);
+}
+
+.bg-alt {
+  background-color: var(--color-bg-alt);
+}
+
+.bg-brand {
+  background-color: var(--color-bg-brand);
+}
+
+.list-plain {
+  padding: 0;
+  list-style: none;
+}
+
+.full-height {
+  display: grid;
+  place-content: center;
+  min-height: 60vh;
+}
+
+/* =========================================================================
+   7. EXCEPTIONS / print
+   ========================================================================= */
+
+@media print {
+  .site-header,
+  .site-nav,
+  .skip-link,
+  .cta-band,
+  .debug-strip {
+    display: none;
+  }
+
+  body {
+    color: #000;
+    font-size: 12pt;
+  }
+
+  a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+  }
+}

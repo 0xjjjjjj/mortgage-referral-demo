@@ -1,0 +1,410 @@
+<!doctype html>
+<!--
+  ===========================================================================
+  Meadowbrook Mortgage Demo — Application form (/apply)
+  Portfolio demo by 1MR LLC. Not a real financial services firm.
+
+  <head>, skip link, disclaimer banner, <header> and <footer> are copied
+  verbatim from index.html, the canonical page template. Only <title>, the
+  meta description, the canonical and og URLs, the nav aria-current marker
+  and the contents of <main> differ. tools/verify.sh enforces that.
+  ===========================================================================
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Apply Online — Mortgage Pre-Qualification Form Demo</title>
+    <meta
+      name="description"
+      content="A demonstration application form showing how referral attribution reaches hidden CRM fields. Nothing is transmitted; a real HubSpot embed replaces the mock."
+    />
+    <link rel="canonical" href="https://mortgage-referral-demo.pages.dev/apply" />
+    <meta name="robots" content="index,follow" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#1a4d8f" />
+
+    <!-- Open Graph. og:image is omitted deliberately: this repo carries no
+         binary assets, and a broken image reference is worse than none. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Meadowbrook Mortgage Demo" />
+    <meta
+      property="og:title"
+      content="Apply Online — Mortgage Pre-Qualification Form Demo"
+    />
+    <meta
+      property="og:description"
+      content="A demonstration application form showing referral attribution landing in hidden CRM fields. Nothing is transmitted."
+    />
+    <meta property="og:url" content="https://mortgage-referral-demo.pages.dev/apply" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a4d8f'/%3E%3Cpath d='M16 7 6 15h3v10h5v-6h4v6h5V15h3z' fill='%23fff'/%3E%3C/svg%3E"
+      type="image/svg+xml"
+    />
+
+    <!-- ===================================================================
+         LocalBusiness schema (JSON-LD). Present in the <head> of every page.
+
+         Type MortgageLoanCompany is a subtype of FinancialService, which is
+         itself a LocalBusiness — so this satisfies the LocalBusiness
+         requirement while being maximally specific, which is what Google's
+         structured-data guidance asks for.
+
+         Everything below is fictional. aggregateRating intentionally
+         matches the six testimonials rendered on /reviews; a schema rating
+         count that disagrees with the visible reviews is both a validator
+         warning and, on a real site, a policy problem.
+         =================================================================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MortgageLoanCompany",
+        "@id": "https://mortgage-referral-demo.pages.dev/#organization",
+        "name": "Meadowbrook Mortgage Demo",
+        "description": "A demo of the personalized-referral flow that a small mortgage branch would ship to real estate agent partners.",
+        "url": "https://mortgage-referral-demo.pages.dev/",
+        "telephone": "+1-630-555-0100",
+        "email": "hello@meadowbrook-mortgage-demo.example",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1200 Meadowbrook Court, Suite 210",
+          "addressLocality": "Naperville",
+          "addressRegion": "IL",
+          "postalCode": "60540",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 41.7508,
+          "longitude": -88.1535
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "10:00",
+            "closes": "14:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "6",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "DuPage County, Illinois"
+        },
+        "disambiguatingDescription": "Fictional business used as a portfolio demonstration by 1MR LLC. Not a real financial services firm."
+      }
+    </script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- ===================================================================
+         GA4. Measurement ID is a placeholder — see README "Configuration".
+         Loaded async so it never blocks render; the gtag stub queues any
+         calls made before the library arrives.
+         =================================================================== -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <!-- Deferred: execute in order, after parse, without blocking render. -->
+    <script src="/js/params.js" defer></script>
+    <script src="/js/analytics.js" defer></script>
+    <script src="/js/hubspot-form.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Disclaimer appears twice on every page: here at the very top where
+         it cannot be missed, and again in the footer. Mortgage services are
+         regulated; this is server-rendered HTML, never injected by JS. -->
+    <div class="disclaimer-banner">
+      <div class="wrapper">
+        Portfolio demo by 1MR LLC. Not a real financial services firm.
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="wrapper site-header__inner repel">
+        <a class="site-logo" href="/">
+          <svg
+            class="site-logo__mark"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect width="32" height="32" rx="6" fill="#1a4d8f" />
+            <path d="M16 7 6 15h3v10h5v-6h4v6h5V15h3z" fill="#fff" />
+          </svg>
+          <span class="site-logo__text">
+            Meadowbrook
+            <small>Mortgage Demo</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Main">
+          <ul class="cluster">
+            <li><a href="/about">About</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/agents">For Agents</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a class="button" href="/apply" aria-current="page">Apply</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+
+      <section class="region">
+        <div class="wrapper flow" data-width="narrow">
+          <p class="hero__eyebrow">Application demo</p>
+          <h1>Start your pre-qualification</h1>
+          <p class="hero__lede">
+            Four fields and the referral details that came with your link. A real branch
+            would receive this in its CRM with the referring agent and the owning loan
+            officer already attached.
+          </p>
+
+          <div class="notice flow">
+            <p class="notice__title">Nothing you type here is transmitted anywhere</p>
+            <p>
+              This is a portfolio demo of a fictional business. The form below is a styled
+              mock. It has no action, posts to no server, sets no cookie and stores
+              nothing, in the browser or elsewhere. Please do not enter real personal or
+              financial information.
+            </p>
+            <p>
+              The HubSpot portal ID and form GUID in <code>js/hubspot-form.js</code> are
+              placeholders. Replace both, as described in the README under
+              <strong>Configuration</strong>, and the genuine HubSpot embed mounts in place
+              of this mock automatically. No other edit is required, and the attribution
+              logic below is the same code either way.
+            </p>
+          </div>
+
+          <!-- ================================================================
+               REAL EMBED TARGET
+
+               When js/hubspot-form.js finds real credentials it loads
+               https://js.hsforms.net/forms/embed/v2.js and mounts the form
+               into the empty div below, using the pattern:
+
+                 hbspt.forms.create({
+                   portalId: "YOUR_PORTAL_ID",
+                   formId:   "YOUR_FORM_GUID",
+                   region:   "na1",
+                   target:   "[data-hs-form-target]",
+                   onFormReady: function (form) {
+                     form.setFieldValue("referring_agent", agent);
+                     form.setFieldValue("loan_officer", lo);
+                   },
+                 });
+
+               portalId and formId are NOT hard-coded in this page. They live
+               at the top of js/hubspot-form.js — see the README section
+               "Configuration", subsection 1, which also lists the six field
+               internal names the HubSpot form must define.
+               ============================================================ -->
+          <div data-hs-form-target></div>
+
+          <div class="form-mock" data-hs-mock hidden>
+            <p class="notice__title">Sample application form (demo, non-functional)</p>
+
+            <div class="form-field">
+              <label for="first_name">First name</label>
+              <input
+                type="text"
+                id="first_name"
+                name="first_name"
+                autocomplete="given-name"
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="last_name">Last name</label>
+              <input
+                type="text"
+                id="last_name"
+                name="last_name"
+                autocomplete="family-name"
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" autocomplete="email" />
+            </div>
+
+            <div class="form-field">
+              <label for="phone">Phone number</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" />
+            </div>
+
+            <p class="text-muted" id="hidden-field-note">
+              The two fields below are <strong>hidden fields</strong> in the real HubSpot
+              form — a buyer never sees them. They are shown here, read-only, so you can
+              watch them populate from the <code>agent</code> and <code>lo</code> values in
+              the address bar.
+            </p>
+
+            <div class="form-field">
+              <label for="referring_agent">Referring agent (hidden field)</label>
+              <input
+                type="text"
+                id="referring_agent"
+                name="referring_agent"
+                data-mock-field="referring_agent"
+                autocomplete="off"
+                readonly
+                aria-describedby="hidden-field-note"
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="loan_officer">Loan officer (hidden field)</label>
+              <input
+                type="text"
+                id="loan_officer"
+                name="loan_officer"
+                data-mock-field="loan_officer"
+                autocomplete="off"
+                readonly
+                aria-describedby="hidden-field-note"
+              />
+            </div>
+
+            <p>
+              <button class="button" type="button" data-mock-submit>
+                Submit application
+              </button>
+            </p>
+
+            <div class="notice" data-mock-confirmation tabindex="-1" hidden>
+              <p class="notice__title">Demo submission recorded locally</p>
+              <p>
+                In the real integration this is where HubSpot's confirmation would appear
+                and the <code>form_submit</code> analytics event would fire. Nothing left
+                your browser.
+              </p>
+            </div>
+          </div>
+
+          <h2 class="flow-space-xl">Integration preview</h2>
+          <p>
+            The referral values resolved from this page's URL, and the exact HubSpot API
+            calls that fire inside <code>onFormReady</code>. Add
+            <code>?agent=Dana%20Whitfield&amp;lo=sarah</code> to the address bar to see
+            both fields and both calls populate.
+          </p>
+
+          <div class="debug-strip flow-space-l">
+            <dl>
+              <dt>referring_agent (from ?agent)</dt>
+              <dd data-hs-preview-agent>(not supplied)</dd>
+              <dt>loan_officer (from ?lo)</dt>
+              <dd data-hs-preview-lo>(not supplied)</dd>
+            </dl>
+            <pre data-hs-preview-calls>// no referral parameters present — no calls fire</pre>
+          </div>
+
+          <p class="text-muted flow-space-l">
+            Meadowbrook Mortgage Demo is fictional. Submitting this form creates no
+            application, no lending relationship and no obligation of any kind. Nothing on
+            this page is an offer to lend, a commitment to lend, or financial advice.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer region">
+      <div class="wrapper flow">
+        <div class="grid" data-layout="thirds">
+          <div class="flow">
+            <h2>Meadowbrook Mortgage Demo</h2>
+            <p>
+              1200 Meadowbrook Court, Suite 210<br />
+              Naperville, IL 60540
+            </p>
+            <p>
+              <a href="tel:+16305550100">(630) 555-0100</a><br />
+              <a href="sms:+16305550100">Text us</a><br />
+              <a href="mailto:hello@meadowbrook-mortgage-demo.example">
+                hello@meadowbrook-mortgage-demo.example
+              </a>
+            </p>
+          </div>
+
+          <div class="flow">
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/about">About</a></li>
+              <li><a href="/team">Our team</a></li>
+              <li><a href="/agents">For agents</a></li>
+              <li><a href="/reviews">Reviews</a></li>
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/calendar">Book a call</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="flow">
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy">Privacy policy</a></li>
+              <li><a href="/terms">Terms of use</a></li>
+              <li><a href="/disclosures">Disclosures</a></li>
+            </ul>
+            <h2 class="flow-space-l">Elsewhere</h2>
+            <ul>
+              <li>
+                <a href="https://1mr.llc" rel="noopener">Built by 1MR LLC</a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/0xjjjjjj/mortgage-referral-demo"
+                  rel="noopener"
+                  >Source on GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="disclaimer">
+          <strong>Portfolio demo by 1MR LLC. Not a real financial services firm.</strong>
+          Meadowbrook Mortgage Demo is a fictional business created to demonstrate static
+          site development, URL personalization and CRM form integration. No content on
+          this site is an offer to lend, a commitment to lend, or financial advice. The
+          loan officers, testimonials, address and phone number are invented.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

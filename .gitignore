@@ -1,0 +1,17 @@
+.DS_Store
+node_modules/
+*.log
+
+# Lighthouse / Chrome headless temp profiles. Under WSL an unset profile dir
+# resolves to a literal "undefined" path and dumps ~5MB into the repo root.
+.lighthouseci/
+lighthouse-*.json
+undefined:/
+\\\\wsl.localhost*
+*lighthouse.[0-9]*/
+
+# Agent and tooling state, deliberately untracked
+.claude/
+.superpowers/
+.tldr/
+.tldrignore

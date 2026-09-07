@@ -1,0 +1,27 @@
+{
+  "_comment": "Portfolio demo by 1MR LLC. Not a real financial services firm. These loan officers are fictional. Photos are inline SVG data URIs rather than image files, so the whole lookup is one request and the repo carries no binary assets. Deliberately no NMLS IDs: inventing licence numbers for a fictional mortgage company is the one detail that could make a demo look like a real regulated entity.",
+  "_schema": "slug -> { first_name, full_name, title, photo, focus }",
+  "officers": {
+    "sarah": {
+      "first_name": "Sarah",
+      "full_name": "Sarah Chen",
+      "title": "Senior Loan Officer",
+      "focus": "First-time buyers and condo financing",
+      "photo": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160' role='img'%3E%3Crect width='160' height='160' fill='%23e8f0f9'/%3E%3Ccircle cx='80' cy='60' r='27' fill='%231a4d8f'/%3E%3Cpath d='M22 160c0-32 26-58 58-58s58 26 58 58z' fill='%231a4d8f'/%3E%3C/svg%3E"
+    },
+    "marcus": {
+      "first_name": "Marcus",
+      "full_name": "Marcus Reyes",
+      "title": "Loan Officer",
+      "focus": "Move-up buyers and renovation lending",
+      "photo": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160' role='img'%3E%3Crect width='160' height='160' fill='%23f2f5f8'/%3E%3Ccircle cx='80' cy='60' r='27' fill='%23123a68'/%3E%3Cpath d='M22 160c0-32 26-58 58-58s58 26 58 58z' fill='%23123a68'/%3E%3C/svg%3E"
+    },
+    "jordan": {
+      "first_name": "Jordan",
+      "full_name": "Jordan Ellis",
+      "title": "Loan Officer",
+      "focus": "Self-employed borrowers and investment property",
+      "photo": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160' role='img'%3E%3Crect width='160' height='160' fill='%23e2e7ec'/%3E%3Ccircle cx='80' cy='60' r='27' fill='%232463b0'/%3E%3Cpath d='M22 160c0-32 26-58 58-58s58 26 58 58z' fill='%232463b0'/%3E%3C/svg%3E"
+    }
+  }
+}

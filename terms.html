@@ -1,0 +1,381 @@
+<!doctype html>
+<!--
+  ===========================================================================
+  Meadowbrook Mortgage Demo — Terms of use (/terms)
+  Portfolio demo by 1MR LLC. Not a real financial services firm.
+
+  <head>, skip link, disclaimer banner, <header> and <footer> are copied
+  verbatim from index.html, the canonical page template. Only <title>, the
+  meta description, the canonical and og URLs, the nav aria-current marker
+  and the contents of <main> differ. tools/verify.sh enforces that.
+  ===========================================================================
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Terms of Use Sample — Meadowbrook Mortgage Demo Site</title>
+    <meta
+      name="description"
+      content="Illustrative terms of use covering acceptable use, warranty disclaimers, limitation of liability and Illinois governing law for this portfolio demo site."
+    />
+    <link rel="canonical" href="https://mortgage-referral-demo.pages.dev/terms" />
+    <meta name="robots" content="index,follow" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#1a4d8f" />
+
+    <!-- Open Graph. og:image is omitted deliberately: this repo carries no
+         binary assets, and a broken image reference is worse than none. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Meadowbrook Mortgage Demo" />
+    <meta
+      property="og:title"
+      content="Terms of Use Sample — Meadowbrook Mortgage Demo Site"
+    />
+    <meta
+      property="og:description"
+      content="Illustrative terms of use covering acceptable use, warranty disclaimers, liability limits and Illinois governing law."
+    />
+    <meta property="og:url" content="https://mortgage-referral-demo.pages.dev/terms" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a4d8f'/%3E%3Cpath d='M16 7 6 15h3v10h5v-6h4v6h5V15h3z' fill='%23fff'/%3E%3C/svg%3E"
+      type="image/svg+xml"
+    />
+
+    <!-- ===================================================================
+         LocalBusiness schema (JSON-LD). Present in the <head> of every page.
+
+         Type MortgageLoanCompany is a subtype of FinancialService, which is
+         itself a LocalBusiness — so this satisfies the LocalBusiness
+         requirement while being maximally specific, which is what Google's
+         structured-data guidance asks for.
+
+         Everything below is fictional. aggregateRating intentionally
+         matches the six testimonials rendered on /reviews; a schema rating
+         count that disagrees with the visible reviews is both a validator
+         warning and, on a real site, a policy problem.
+         =================================================================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MortgageLoanCompany",
+        "@id": "https://mortgage-referral-demo.pages.dev/#organization",
+        "name": "Meadowbrook Mortgage Demo",
+        "description": "A demo of the personalized-referral flow that a small mortgage branch would ship to real estate agent partners.",
+        "url": "https://mortgage-referral-demo.pages.dev/",
+        "telephone": "+1-630-555-0100",
+        "email": "hello@meadowbrook-mortgage-demo.example",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1200 Meadowbrook Court, Suite 210",
+          "addressLocality": "Naperville",
+          "addressRegion": "IL",
+          "postalCode": "60540",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 41.7508,
+          "longitude": -88.1535
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "10:00",
+            "closes": "14:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "6",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "DuPage County, Illinois"
+        },
+        "disambiguatingDescription": "Fictional business used as a portfolio demonstration by 1MR LLC. Not a real financial services firm."
+      }
+    </script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- ===================================================================
+         GA4. Measurement ID is a placeholder — see README "Configuration".
+         Loaded async so it never blocks render; the gtag stub queues any
+         calls made before the library arrives.
+         =================================================================== -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <!-- Deferred: execute in order, after parse, without blocking render. -->
+    <script src="/js/params.js" defer></script>
+    <script src="/js/analytics.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Disclaimer appears twice on every page: here at the very top where
+         it cannot be missed, and again in the footer. Mortgage services are
+         regulated; this is server-rendered HTML, never injected by JS. -->
+    <div class="disclaimer-banner">
+      <div class="wrapper">
+        Portfolio demo by 1MR LLC. Not a real financial services firm.
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="wrapper site-header__inner repel">
+        <a class="site-logo" href="/">
+          <svg
+            class="site-logo__mark"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect width="32" height="32" rx="6" fill="#1a4d8f" />
+            <path d="M16 7 6 15h3v10h5v-6h4v6h5V15h3z" fill="#fff" />
+          </svg>
+          <span class="site-logo__text">
+            Meadowbrook
+            <small>Mortgage Demo</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Main">
+          <ul class="cluster">
+            <li><a href="/about">About</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/agents">For Agents</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a class="button" href="/apply">Apply</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+
+      <section class="region">
+        <div class="wrapper" data-width="narrow">
+          <div class="prose flow">
+            <p class="hero__eyebrow">Legal</p>
+            <h1>Terms of use</h1>
+
+            <div class="notice">
+              <p class="notice__title">This is a sample document, not a real agreement</p>
+              <p>
+                Meadowbrook Mortgage Demo is a fictional business created as a portfolio
+                demonstration by 1MR LLC. It is not a real financial services firm. The
+                text below is an illustrative sample of the shape terms of use take on a
+                site of this kind. It is not legal advice, it creates no obligations for
+                anybody, and it is not enforceable.
+              </p>
+            </div>
+
+            <p class="text-muted">Last reviewed: September 2025.</p>
+
+            <h2>Acceptance</h2>
+            <p>
+              On a real site, using the site would indicate acceptance of these terms. Any
+              visitor who did not accept them would be asked to stop using the site.
+            </p>
+
+            <h2>Acceptable use</h2>
+            <p>You would be asked to use the site lawfully, and specifically not to:</p>
+            <ul>
+              <li>Submit information that is false, or that belongs to somebody else</li>
+              <li>Attempt to gain unauthorised access to any part of the site or its hosting</li>
+              <li>Interfere with the site's operation, or with anyone else's use of it</li>
+              <li>Scrape, harvest or bulk-collect content or contact details</li>
+              <li>Use the site to send unsolicited commercial messages</li>
+              <li>Copy or reuse site content commercially without written permission</li>
+            </ul>
+
+            <h2>No lending relationship is created</h2>
+            <p>
+              Nothing on this site is an offer to lend, a commitment to lend, an approval,
+              a rate lock, or financial advice. Reading these pages, submitting a form, or
+              speaking with someone about a mortgage does not create a lending
+              relationship, a client relationship, or any obligation on either side. Any
+              actual mortgage would be governed by separate written agreements signed by
+              both parties, and would remain subject to a complete application,
+              documentation, underwriting and credit approval.
+            </p>
+
+            <h2>Content accuracy</h2>
+            <p>
+              Educational content on a site like this is general and may become out of date
+              as products, regulations and market conditions change. It is not a substitute
+              for advice about your own circumstances from a licensed professional.
+            </p>
+
+            <h2>Third-party links and services</h2>
+            <p>
+              This site links to services operated by other companies, including a
+              scheduling provider and a CRM form provider. Those services are governed by
+              their own terms and privacy policies. A link is not an endorsement, and no
+              responsibility is taken for content or practices on sites that are not this
+              one.
+            </p>
+
+            <h2>Intellectual property</h2>
+            <p>
+              Site design, text and markup are owned by 1MR LLC. The source is published
+              publicly as a portfolio example, and is available on GitHub under the terms
+              stated in that repository.
+            </p>
+
+            <h2>Disclaimer of warranties</h2>
+            <p>
+              The site is provided "as is" and "as available", without warranties of any
+              kind, express or implied, including any implied warranties of
+              merchantability, fitness for a particular purpose and non-infringement. There
+              is no warranty that the site will be uninterrupted, timely, secure or free of
+              error, or that any content on it is accurate or complete.
+            </p>
+
+            <h2>Limitation of liability</h2>
+            <p>
+              To the fullest extent permitted by law, neither 1MR LLC nor its members would
+              be liable for any indirect, incidental, special, consequential, exemplary or
+              punitive damages, or for any loss of profits, revenue, data or goodwill,
+              arising from use of or inability to use the site, however caused and on any
+              theory of liability. Where liability cannot be excluded, it would be limited
+              to the amount you paid to use the site, which is nothing.
+            </p>
+
+            <h2>Indemnity</h2>
+            <p>
+              On a real site, a visitor would agree to indemnify the operator against
+              claims arising from their misuse of the site or their breach of these terms.
+            </p>
+
+            <h2>Governing law</h2>
+            <p>
+              These sample terms would be governed by the laws of the State of Illinois,
+              without regard to its conflict-of-laws rules, and disputes would be brought
+              in the state or federal courts located in DuPage County, Illinois.
+            </p>
+
+            <h2>Severability and changes</h2>
+            <p>
+              If any provision were held unenforceable, the rest would remain in force.
+              Terms would be updated from time to time, with the revision date at the top
+              changed to match, and continued use would indicate acceptance of the revised
+              version.
+            </p>
+
+            <h2>Contact</h2>
+            <p>
+              Because this business is fictional, the address below reaches nobody. It is
+              included to show where a real document would put it.
+            </p>
+            <p>
+              Meadowbrook Mortgage Demo<br />
+              1200 Meadowbrook Court, Suite 210<br />
+              Naperville, IL 60540<br />
+              <a href="mailto:hello@meadowbrook-mortgage-demo.example">
+                hello@meadowbrook-mortgage-demo.example
+              </a>
+            </p>
+
+            <p class="text-muted">
+              See also the <a href="/privacy">sample privacy policy</a> and the
+              <a href="/disclosures">sample disclosures</a>.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer region">
+      <div class="wrapper flow">
+        <div class="grid" data-layout="thirds">
+          <div class="flow">
+            <h2>Meadowbrook Mortgage Demo</h2>
+            <p>
+              1200 Meadowbrook Court, Suite 210<br />
+              Naperville, IL 60540
+            </p>
+            <p>
+              <a href="tel:+16305550100">(630) 555-0100</a><br />
+              <a href="sms:+16305550100">Text us</a><br />
+              <a href="mailto:hello@meadowbrook-mortgage-demo.example">
+                hello@meadowbrook-mortgage-demo.example
+              </a>
+            </p>
+          </div>
+
+          <div class="flow">
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/about">About</a></li>
+              <li><a href="/team">Our team</a></li>
+              <li><a href="/agents">For agents</a></li>
+              <li><a href="/reviews">Reviews</a></li>
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/calendar">Book a call</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="flow">
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy">Privacy policy</a></li>
+              <li><a href="/terms">Terms of use</a></li>
+              <li><a href="/disclosures">Disclosures</a></li>
+            </ul>
+            <h2 class="flow-space-l">Elsewhere</h2>
+            <ul>
+              <li>
+                <a href="https://1mr.llc" rel="noopener">Built by 1MR LLC</a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/0xjjjjjj/mortgage-referral-demo"
+                  rel="noopener"
+                  >Source on GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="disclaimer">
+          <strong>Portfolio demo by 1MR LLC. Not a real financial services firm.</strong>
+          Meadowbrook Mortgage Demo is a fictional business created to demonstrate static
+          site development, URL personalization and CRM form integration. No content on
+          this site is an offer to lend, a commitment to lend, or financial advice. The
+          loan officers, testimonials, address and phone number are invented.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

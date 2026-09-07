@@ -1,0 +1,320 @@
+<!doctype html>
+<!--
+  ===========================================================================
+  Meadowbrook Mortgage Demo — Jordan Ellis
+  Portfolio demo by 1MR LLC. Not a real financial services firm.
+
+  Copied from the canonical template (index.html). Only the <title>,
+  <meta name="description">, <link rel="canonical">, the three og: values,
+  the aria-current nav marker and <main> differ from the template. All
+  asset paths remain absolute-from-root even though this file lives in
+  /team/, so they resolve unchanged.
+  ===========================================================================
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Jordan Ellis, Loan Officer — Meadowbrook Mortgage Demo</title>
+    <meta
+      name="description"
+      content="Jordan Ellis is a fictional Loan Officer at Meadowbrook Mortgage Demo focused on self-employed borrowers and investment property in DuPage County."
+    />
+    <link rel="canonical" href="https://mortgage-referral-demo.pages.dev/team/jordan" />
+    <meta name="robots" content="index,follow" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#1a4d8f" />
+
+    <!-- Open Graph. og:image is omitted deliberately: this repo carries no
+         binary assets, and a broken image reference is worse than none. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Meadowbrook Mortgage Demo" />
+    <meta
+      property="og:title"
+      content="Jordan Ellis, Loan Officer — Meadowbrook Mortgage Demo"
+    />
+    <meta
+      property="og:description"
+      content="A fictional Loan Officer focused on self-employed borrowers and investment property in DuPage County."
+    />
+    <meta property="og:url" content="https://mortgage-referral-demo.pages.dev/team/jordan" />
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231a4d8f'/%3E%3Cpath d='M16 7 6 15h3v10h5v-6h4v6h5V15h3z' fill='%23fff'/%3E%3C/svg%3E"
+      type="image/svg+xml"
+    />
+
+    <!-- ===================================================================
+         LocalBusiness schema (JSON-LD). Present in the <head> of every page.
+
+         Type MortgageLoanCompany is a subtype of FinancialService, which is
+         itself a LocalBusiness — so this satisfies the LocalBusiness
+         requirement while being maximally specific, which is what Google's
+         structured-data guidance asks for.
+
+         Everything below is fictional. aggregateRating intentionally
+         matches the six testimonials rendered on /reviews; a schema rating
+         count that disagrees with the visible reviews is both a validator
+         warning and, on a real site, a policy problem.
+         =================================================================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MortgageLoanCompany",
+        "@id": "https://mortgage-referral-demo.pages.dev/#organization",
+        "name": "Meadowbrook Mortgage Demo",
+        "description": "A demo of the personalized-referral flow that a small mortgage branch would ship to real estate agent partners.",
+        "url": "https://mortgage-referral-demo.pages.dev/",
+        "telephone": "+1-630-555-0100",
+        "email": "hello@meadowbrook-mortgage-demo.example",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1200 Meadowbrook Court, Suite 210",
+          "addressLocality": "Naperville",
+          "addressRegion": "IL",
+          "postalCode": "60540",
+          "addressCountry": "US"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 41.7508,
+          "longitude": -88.1535
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "10:00",
+            "closes": "14:00"
+          }
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "6",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "areaServed": {
+          "@type": "AdministrativeArea",
+          "name": "DuPage County, Illinois"
+        },
+        "disambiguatingDescription": "Fictional business used as a portfolio demonstration by 1MR LLC. Not a real financial services firm."
+      }
+    </script>
+
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- ===================================================================
+         GA4. Measurement ID is a placeholder — see README "Configuration".
+         Loaded async so it never blocks render; the gtag stub queues any
+         calls made before the library arrives.
+         =================================================================== -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
+
+    <!-- Deferred: execute in order, after parse, without blocking render. -->
+    <script src="/js/params.js" defer></script>
+    <script src="/js/analytics.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- Disclaimer appears twice on every page: here at the very top where
+         it cannot be missed, and again in the footer. Mortgage services are
+         regulated; this is server-rendered HTML, never injected by JS. -->
+    <div class="disclaimer-banner">
+      <div class="wrapper">
+        Portfolio demo by 1MR LLC. Not a real financial services firm.
+      </div>
+    </div>
+
+    <header class="site-header">
+      <div class="wrapper site-header__inner repel">
+        <a class="site-logo" href="/">
+          <svg
+            class="site-logo__mark"
+            viewBox="0 0 32 32"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <rect width="32" height="32" rx="6" fill="#1a4d8f" />
+            <path d="M16 7 6 15h3v10h5v-6h4v6h5V15h3z" fill="#fff" />
+          </svg>
+          <span class="site-logo__text">
+            Meadowbrook
+            <small>Mortgage Demo</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Main">
+          <ul class="cluster">
+            <li><a href="/about">About</a></li>
+            <li><a href="/team" aria-current="page">Team</a></li>
+            <li><a href="/agents">For Agents</a></li>
+            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a class="button" href="/apply">Apply</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero region">
+        <div class="wrapper flow text-center">
+          <div class="avatar" data-size="large" style="margin-inline: auto">
+            <img
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160' role='img'%3E%3Crect width='160' height='160' fill='%23e2e7ec'/%3E%3Ccircle cx='80' cy='60' r='27' fill='%232463b0'/%3E%3Cpath d='M22 160c0-32 26-58 58-58s58 26 58 58z' fill='%232463b0'/%3E%3C/svg%3E"
+              alt="Portrait placeholder for Jordan Ellis"
+              width="160"
+              height="160"
+            />
+          </div>
+          <p class="hero__eyebrow">Loan Officer</p>
+          <h1>Jordan Ellis</h1>
+          <p class="hero__lede measure" style="margin-inline: auto">
+            Self-employed borrowers and investment property
+          </p>
+          <div class="cluster flow-space-l" style="justify-content: center">
+            <a class="button" data-size="large" href="/apply">Apply with Jordan</a>
+            <a class="button" data-variant="secondary" data-size="large" href="tel:+16305550100">
+              Call
+            </a>
+            <a class="button" data-variant="secondary" data-size="large" href="sms:+16305550100">
+              Text
+            </a>
+            <a class="button" data-variant="secondary" data-size="large" href="/calendar">
+              Book a call
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="region" aria-labelledby="jordan-bio">
+        <div class="wrapper prose flow">
+          <h2 id="jordan-bio" class="visually-hidden">About Jordan</h2>
+          <p>
+            Jordan's files rarely look like a standard W-2 application, and that's the
+            point. Self-employed borrowers, 1099 contractors and small business owners
+            tend to have income that's real but not simple, spread across schedules,
+            K-1s and write-offs that lower a tax bill but complicate a debt-to-income
+            calculation. Jordan's job is to find the version of that income a lender
+            can actually work with, and to explain, in plain terms, why the paperwork
+            list is longer than a typical buyer's.
+          </p>
+          <p>
+            Investment property is the other lane, and it comes with its own vocabulary:
+            rental income offsets, reserve requirements, and financing structures that
+            behave differently once a property stops being a primary residence. Jordan
+            treats every investor conversation as a chance to map out the next few
+            purchases, not just the one in front of them.
+          </p>
+          <p>
+            Agent partners who work with investors and small business owners tend to
+            gravitate toward Jordan specifically because these files take patience, and
+            Jordan doesn't rush them. A referral that says "self-employed, complicated
+            income" is treated as a normal Tuesday, not a red flag.
+          </p>
+          <p>
+            If Jordan is your referral, expect a longer document checklist up front, a
+            clear explanation of why each item matters, and someone who has seen the
+            income structure you're worried about before.
+          </p>
+        </div>
+      </section>
+
+      <section class="region bg-alt text-center">
+        <div class="wrapper flow">
+          <p>
+            <a href="/team">Back to the full team</a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer region">
+      <div class="wrapper flow">
+        <div class="grid" data-layout="thirds">
+          <div class="flow">
+            <h2>Meadowbrook Mortgage Demo</h2>
+            <p>
+              1200 Meadowbrook Court, Suite 210<br />
+              Naperville, IL 60540
+            </p>
+            <p>
+              <a href="tel:+16305550100">(630) 555-0100</a><br />
+              <a href="sms:+16305550100">Text us</a><br />
+              <a href="mailto:hello@meadowbrook-mortgage-demo.example">
+                hello@meadowbrook-mortgage-demo.example
+              </a>
+            </p>
+          </div>
+
+          <div class="flow">
+            <h2>Explore</h2>
+            <ul>
+              <li><a href="/about">About</a></li>
+              <li><a href="/team">Our team</a></li>
+              <li><a href="/agents">For agents</a></li>
+              <li><a href="/reviews">Reviews</a></li>
+              <li><a href="/faq">FAQ</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/calendar">Book a call</a></li>
+              <li><a href="/contact">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="flow">
+            <h2>Legal</h2>
+            <ul>
+              <li><a href="/privacy">Privacy policy</a></li>
+              <li><a href="/terms">Terms of use</a></li>
+              <li><a href="/disclosures">Disclosures</a></li>
+            </ul>
+            <h2 class="flow-space-l">Elsewhere</h2>
+            <ul>
+              <li>
+                <a href="https://1mr.llc" rel="noopener">Built by 1MR LLC</a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/0xjjjjjj/mortgage-referral-demo"
+                  rel="noopener"
+                  >Source on GitHub</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="disclaimer">
+          <strong>Portfolio demo by 1MR LLC. Not a real financial services firm.</strong>
+          Meadowbrook Mortgage Demo is a fictional business created to demonstrate static
+          site development, URL personalization and CRM form integration. No content on
+          this site is an offer to lend, a commitment to lend, or financial advice. The
+          loan officers, testimonials, address and phone number are invented.
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
