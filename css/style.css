@@ -356,9 +356,19 @@ th {
   --grid-min-item-size: clamp(16rem, 45%, 28rem);
 }
 
+/* Explicit columns rather than auto-fit. auto-fit packs by available space
+   and knows nothing about item count, so a three-item row lands on 2 + 1
+   with an orphan in the awkward 34rem to 48rem band. "One column or three,
+   never two" is a statement about content, not about space, so a breakpoint
+   is the right tool here rather than a failure of intrinsic layout. */
 .grid[data-layout="thirds"] {
-  --grid-placement: auto-fit;
-  --grid-min-item-size: clamp(14rem, 30%, 20rem);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 48rem) {
+  .grid[data-layout="thirds"] {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 /* CLUSTER — wrapping horizontal group. */
@@ -432,9 +442,34 @@ th {
   backdrop-filter: blur(8px);
 }
 
+/* Header is a single wrapping flex row. Children are ordered explicitly so
+   the same DOM serves both layouts without duplicated markup:
+   mobile   logo | Apply | Menu   with the nav on its own full-width line
+   desktop  logo | nav | Apply    with the toggle removed. */
 .site-header__inner {
-  --gutter: var(--space-s);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2xs) var(--space-s);
   padding-block: var(--space-xs);
+}
+
+.site-header__inner > .site-logo {
+  order: 1;
+  margin-inline-end: auto;
+}
+
+.site-header__cta {
+  order: 2;
+}
+
+.nav-toggle {
+  order: 3;
+}
+
+.site-header__inner > .site-nav {
+  order: 4;
+  flex-basis: 100%;
 }
 
 .site-logo {
@@ -493,6 +528,184 @@ th {
 .site-nav a:not(.button)[aria-current="page"] {
   color: var(--color-primary);
   font-weight: 700;
+}
+
+/* --- Mobile nav disclosure -------------------------------------------
+   The nav is only ever hidden under .has-js-nav, which nav.js adds. If
+   that script fails to load the links stay on screen, so a visitor is
+   never stranded with an inert Menu button and no way to navigate. */
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  min-height: 44px;
+  padding: var(--space-2xs) var(--space-xs);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-m);
+  background-color: transparent;
+  color: var(--color-text-strong);
+  font-size: var(--size-step--1);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nav-toggle[hidden] {
+  display: none;
+}
+
+/* Below 30rem the logo, Apply and Menu together overflow one row and the
+   toggle wraps to a second line. Reclaim the space by dropping the visible
+   "Menu" word (its accessible name survives in .visually-hidden) and
+   trimming the CTA, rather than letting the header grow a row taller and
+   eat viewport on the smallest phones. */
+
+
+@media (max-width: 33.99rem) {
+  .site-header__inner {
+    column-gap: var(--space-2xs);
+  }
+
+  .site-logo {
+    min-width: 0;
+    font-size: var(--size-step-0);
+  }
+
+  .site-header__cta {
+    padding-inline: var(--space-s);
+  }
+
+  .nav-toggle {
+    padding-inline: var(--space-xs);
+  }
+
+  .site-logo__text small {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+  }
+
+  .nav-toggle__label {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip-path: inset(50%) !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* 360px is a very common Android width and the three header items need
+   323px there against 309px available. Trimming the wordmark and CTA buys
+   the difference so the header stays one row instead of growing to 120px. */
+@media (max-width: 23.5rem) {
+  .site-logo {
+    font-size: var(--size-step--1);
+  }
+
+  .site-logo__mark {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .site-header__cta {
+    padding-inline: var(--space-xs);
+    font-size: var(--size-step--1);
+  }
+}
+
+.nav-toggle__bars,
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: currentColor;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+.nav-toggle__bars {
+  position: relative;
+}
+
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  position: absolute;
+  content: "";
+}
+
+.nav-toggle__bars::before {
+  top: -6px;
+}
+
+.nav-toggle__bars::after {
+  top: 6px;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars {
+  background-color: transparent;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+.has-js-nav .site-nav {
+  display: none;
+}
+
+.has-js-nav .site-nav.is-open {
+  display: block;
+  padding-block: var(--space-2xs) var(--space-xs);
+  border-block-start: var(--border-thin);
+}
+
+.has-js-nav .site-nav.is-open ul {
+  flex-direction: column;
+  align-items: stretch;
+  --gutter: 0;
+}
+
+.has-js-nav .site-nav.is-open a {
+  display: block;
+  padding-block: var(--space-xs);
+  border-block-end: var(--border-thin);
+  font-size: var(--size-step-0);
+}
+
+@media (min-width: 64rem) {
+  .site-header__inner > .site-logo {
+    margin-inline-end: 0;
+  }
+
+  .site-header__inner > .site-nav {
+    order: 2;
+    flex-basis: auto;
+    margin-inline: auto;
+  }
+
+  .site-header__cta {
+    order: 3;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .has-js-nav .site-nav {
+    display: block;
+  }
 }
 
 /* --- Buttons ---------------------------------------------------------- */

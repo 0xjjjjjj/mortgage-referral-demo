@@ -132,6 +132,7 @@
     <!-- Deferred: execute in order, after parse, without blocking render. -->
     <script src="/js/params.js" defer></script>
     <script src="/js/analytics.js" defer></script>
+    <script src="/js/nav.js" defer></script>
   </head>
 
   <body>
@@ -147,7 +148,7 @@
     </div>
 
     <header class="site-header">
-      <div class="wrapper site-header__inner repel">
+      <div class="wrapper site-header__inner">
         <a class="site-logo" href="/">
           <svg
             class="site-logo__mark"
@@ -164,7 +165,20 @@
           </span>
         </a>
 
-        <nav class="site-nav" aria-label="Main">
+        <a class="button site-header__cta" href="/apply">Apply</a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-nav"
+          hidden
+        >
+          <span class="nav-toggle__bars" aria-hidden="true"></span>
+          <span class="nav-toggle__label">Menu</span>
+        </button>
+
+        <nav class="site-nav" id="site-nav" aria-label="Main">
           <ul class="cluster">
             <li><a href="/about">About</a></li>
             <li><a href="/team" aria-current="page">Team</a></li>
@@ -173,7 +187,6 @@
             <li><a href="/faq">FAQ</a></li>
             <li><a href="/blog">Blog</a></li>
             <li><a href="/contact">Contact</a></li>
-            <li><a class="button" href="/apply">Apply</a></li>
           </ul>
         </nav>
       </div>

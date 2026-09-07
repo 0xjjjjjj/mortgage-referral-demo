@@ -261,7 +261,11 @@ Run in headless Chrome against the live DOM, not asserted from reading the sourc
 | Tap targets >= 44px | `.button` and `.faq-item summary` carry `min-height: 44px` | Pass |
 | `tel:` links | `tel:+16305550100`, E.164 format, dials on iOS and Android | Pass |
 | `sms:` links | `sms:+16305550100` | Pass |
-| Nav wraps without a hamburger | `.cluster` wraps to two rows under ~430px, no JS required | Pass |
+| Header stays one row | Measured at 360, 375, 390, 414, 430, 480, 559, 640, 768, 820, 928, 1024, 1280px | Pass (320px wraps to two rows; accepted) |
+| Nav collapses to a toggle below 64rem | `js/nav.js` disclosure; Apply CTA stays outside the menu | Pass |
+| Nav works with JavaScript disabled | Toggle ships `hidden` on all 23 pages; CSS hides the nav only under `.has-js-nav` | Pass |
+| Three-item grids never orphan | 1 column to 640px, 3 columns from 768px, never 2 | Pass |
+| No horizontal overflow | Zero overflowing elements at all 14 measured widths | Pass |
 | Focus visible on all interactives | 3px outline via `:focus-visible`, never removed | Pass |
 | Reduced motion honoured | `@media (prefers-reduced-motion: reduce)` in the reset | Pass |
 | Works with JavaScript disabled | All 23 pages render fully; `/start` shows its generic welcome | Pass |
