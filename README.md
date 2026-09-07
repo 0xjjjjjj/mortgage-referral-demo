@@ -221,6 +221,24 @@ Real headless Chrome runs against a local static server, mobile form factor, one
 | `/blog/post-1` | 100 | 100 | 100 | 100 |
 | `404.html` | 100 | 100 | 100 | **66** |
 
+### Lighthouse against the live deployment
+
+| Page | Performance | Accessibility | Best Practices | SEO |
+|---|---|---|---|---|
+| `/` | 100 | 100 | 100 | 92 |
+| `/start` | 100 | 100 | 100 | 92 |
+| `/apply` | 99 | 100 | 100 | 92 |
+
+Live SEO is 92 rather than 100 for a reason outside this repository. Cloudflare's account-level **Managed robots.txt** feature (AI Crawl Control / Content Signals) prepends its own block to the served `robots.txt`, and one line in it is a non-standard directive:
+
+```
+Content-Signal: search=yes,ai-train=no,use=reference
+```
+
+Lighthouse's `robots-txt` audit rejects that as an unrecognised field and scores the audit 0, which costs 8 points. The `robots.txt` in this repo is valid and is served intact below Cloudflare's block. To score 100, disable Managed robots.txt for the zone in the Cloudflare dashboard. Worth knowing before you promise a client a perfect SEO score on Cloudflare Pages.
+
+### The 404 page
+
 The 404 SEO score is expected and correct. It fails one audit, `is-crawlable`, because the page carries `<meta name="robots" content="noindex,follow">`. That tag is deliberate: on Cloudflare Pages, requesting `/404.html` directly returns HTTP 200 because it is a real file, so the 404 status code alone does not keep the error page out of search results. Removing the tag would score 100 and make the site slightly worse. It stays.
 
 ### Behavioural tests
