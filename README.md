@@ -4,7 +4,10 @@
 
 Meadowbrook Mortgage Demo is a fictional business. The loan officers, testimonials, address, phone number and reviews are invented. Nothing here is an offer to lend, a commitment to lend, or financial advice. It exists to demonstrate a specific class of front-end work, described below.
 
-- **Live demo:** _pending deployment — see "Deploying" below_
+- **Live demo:** https://mortgage-referral-demo.1mr.llc/
+  - Personalized landing: [`/start?agent=Dana%20Whitfield&lo=sarah`](https://mortgage-referral-demo.1mr.llc/start?agent=Dana%20Whitfield&lo=sarah)
+  - Vanity link: [`/sarah`](https://mortgage-referral-demo.1mr.llc/sarah)
+  - Legacy redirect: [`/about-us`](https://mortgage-referral-demo.1mr.llc/about-us)
 - **Source:** https://github.com/0xjjjjjj/mortgage-referral-demo
 - **Built by:** [1MR LLC](https://1mr.llc)
 

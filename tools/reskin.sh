@@ -15,7 +15,7 @@ TARGETS=(
   "+16305550100|::|phone, tel/sms href format"
   "(630) 555-0100|::|phone, display format"
   "hello@meadowbrook-mortgage-demo.example|::|email"
-  "mortgage-referral-demo.pages.dev|::|domain, in canonicals and sitemap"
+  "mortgage-referral-demo.1mr.llc|::|domain, in canonicals and sitemap"
   "G-XXXXXXXXXX|::|GA4 measurement ID"
   "12345678|::|HubSpot portal ID"
   "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee|::|HubSpot form GUID"

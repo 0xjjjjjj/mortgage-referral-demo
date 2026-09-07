@@ -50,7 +50,7 @@ CANONICAL_PATHS=(
   "/blog/post-5"
 )
 
-BASE_URL="https://mortgage-referral-demo.pages.dev"
+BASE_URL="https://mortgage-referral-demo.1mr.llc"
 
 # Maps a URL path to the file Cloudflare Pages would serve for it.
 path_to_file() {

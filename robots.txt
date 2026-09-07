@@ -8,4 +8,4 @@ Allow: /
 # mortgage site would typically disallow internal search result pages and
 # any authenticated application portal, neither of which exists in this demo.
 
-Sitemap: https://mortgage-referral-demo.pages.dev/sitemap.xml
+Sitemap: https://mortgage-referral-demo.1mr.llc/sitemap.xml
