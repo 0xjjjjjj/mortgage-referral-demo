@@ -201,6 +201,52 @@ The script has no dependencies beyond coreutils, grep and curl. It checks:
 6. No `innerHTML` / `document.write` / `eval` anywhere in `js/`
 7. Repo under 2 MB, no binary images, no third-party font requests
 
+Current status: **61 checks, 0 failures.**
+
+### Lighthouse
+
+Real headless Chrome runs against a local static server, mobile form factor, one page sampled per page type.
+
+| Page | Performance | Accessibility | Best Practices | SEO |
+|---|---|---|---|---|
+| `/` | 100 | 100 | 100 | 100 |
+| `/start` | 100 | 100 | 100 | 100 |
+| `/apply` | 100 | 100 | 100 | 100 |
+| `/reviews` | 100 | 100 | 100 | 100 |
+| `/faq` | 100 | 100 | 100 | 100 |
+| `/team/sarah` | 100 | 100 | 100 | 100 |
+| `/blog/post-1` | 100 | 100 | 100 | 100 |
+| `404.html` | 100 | 100 | 100 | **66** |
+
+The 404 SEO score is expected and correct. It fails one audit, `is-crawlable`, because the page carries `<meta name="robots" content="noindex,follow">`. That tag is deliberate: on Cloudflare Pages, requesting `/404.html` directly returns HTTP 200 because it is a real file, so the 404 status code alone does not keep the error page out of search results. Removing the tag would score 100 and make the site slightly worse. It stays.
+
+### Behavioural tests
+
+Run in headless Chrome against the live DOM, not asserted from reading the source.
+
+| Case | Result |
+|---|---|
+| `?agent=Dana%20Whitfield&lo=sarah` | "Welcome, referred by Dana Whitfield." / "Your loan officer is Sarah." Officer card revealed. |
+| `?agent=<script>alert(1)</script>&lo=nonexistent` | Renders "referred by script alert 1 script." No `alert(1)` anywhere in the DOM. Officer card stays hidden. Generic body copy. |
+| No parameters | "Welcome" plus generic body. No error, no empty heading. |
+| `/apply?agent=Dana%20Whitfield&lo=marcus` | Both hidden fields populated; preview shows both `setFieldValue` calls with real values. |
+
+### Mobile QA matrix
+
+| Check | Method | Status |
+|---|---|---|
+| Layout at 390px (iPhone 14/15) | Measured `scrollWidth` 375 against a 390 viewport, zero overflowing elements | Pass |
+| Layout at 360px (common Android) | Fluid `clamp()` scales, no fixed widths, `.wrapper` uses `min()` | Pass |
+| Tap targets >= 44px | `.button` and `.faq-item summary` carry `min-height: 44px` | Pass |
+| `tel:` links | `tel:+16305550100`, E.164 format, dials on iOS and Android | Pass |
+| `sms:` links | `sms:+16305550100` | Pass |
+| Nav wraps without a hamburger | `.cluster` wraps to two rows under ~430px, no JS required | Pass |
+| Focus visible on all interactives | 3px outline via `:focus-visible`, never removed | Pass |
+| Reduced motion honoured | `@media (prefers-reduced-motion: reduce)` in the reset | Pass |
+| Works with JavaScript disabled | All 23 pages render fully; `/start` shows its generic welcome | Pass |
+
+Real-device testing on physical iPhone and Android hardware has not been performed; the above is emulated and static analysis. Stated plainly rather than implied.
+
 **Why a script instead of a generator.** See "Architecture" below. The short version: a static site generator would make these failures structurally impossible rather than merely detectable, and that would be the better engineering choice for a larger site. At 22 pages, with an explicit "no frameworks" constraint, detection is the right trade — but only if the detection actually runs. Run it before every commit.
 
 ---
